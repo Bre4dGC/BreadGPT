@@ -2,13 +2,45 @@
     x:Class="BreadGPT.Views.ChatView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:comp="clr-namespace:BreadGPT.Styles.Compoments"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:BreadGPT.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:BreadGPT.ViewModels"
     Title="ChatView"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:Background="{StaticResource WindowBackground}"
+    d:DesignHeight="760"
+    d:DesignWidth="1100"
     mc:Ignorable="d">
 
-    <Grid />
+    <Page.DataContext>
+        <vm:ChatViewModel />
+    </Page.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <ItemsControl ItemsSource="{Binding SelectedChat.Messages}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <comp:Message Background="{Binding IsSentByUser, Converter={StaticResource MessageBackgroundConverter}}" MessageContent="{Binding Content}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>                
+            </StackPanel>
+        </ScrollViewer>
+
+
+        <Border
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top">
+            <comp:MessageInput Command="{Binding SelectedChat.SendMessageCommand}" Text="{Binding SelectedChat.NewMessage, UpdateSourceTrigger=PropertyChanged}" />
+        </Border>
+    </Grid>
 </Page>
