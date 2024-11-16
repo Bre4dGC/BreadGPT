@@ -80,13 +80,12 @@
                 Text="Message ChatGPT"
                 Visibility="{Binding ElementName=textbox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
-            <TextBox x:Name="textbox" Grid.Column="0" />
+            <TextBox x:Name="textbox" Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Button Grid.Column="1" HorizontalAlignment="Center">
+            <Button Grid.Column="1" Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}">
                 <Image
                     Width="22"
                     Height="22"
-                    IsEnabled="{Binding ElementName=textbox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}"
                     Opacity="0.8"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Source="/Assets/send.png" />

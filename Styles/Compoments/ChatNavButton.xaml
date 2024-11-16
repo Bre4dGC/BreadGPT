@@ -5,23 +5,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:BreadGPT.Styles.Compoments"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="45"
+    x:Name="UserControl"
+    d:DesignHeight="50"
     d:DesignWidth="230"
     mc:Ignorable="d">
 
     <UserControl.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Height" Value="35" />
+        <Style x:Key="NavButtonStyle" TargetType="RadioButton">
+            <Setter Property="Height" Value="40" />
             <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="Margin" Value="0,0,0,5" />
+            <Setter Property="Margin" Value="0,0,0,7" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Background" Value="{StaticResource ControlBackground}" />
+            <Setter Property="Background" Value="Transparent" />
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="RadioButton">
                         <Border Background="{TemplateBinding Background}" CornerRadius="7">
                             <ContentPresenter
-                                Margin="20,0,0,0"
+                                Margin="5,0"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Center" />
                         </Border>
@@ -33,6 +34,10 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#2f363d" />
                 </Trigger>
+
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="#2f363d" />
+                </Trigger>
             </Style.Triggers>
 
         </Style>
@@ -41,9 +46,70 @@
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Foreground" Value="{StaticResource Foreground}" />
         </Style>
+
+        <Style x:Key="Button" TargetType="ToggleButton">
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="7">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
-    <Button>
-        <TextBlock Text="jopa" />
-    </Button>
+    <RadioButton
+        GroupName="ChatNav"
+        MouseEnter="Button_MouseEnter"
+        MouseLeave="Button_MouseLeave"
+        Style="{StaticResource NavButtonStyle}">
+
+        <RadioButton.Effect>
+            <DropShadowEffect
+                BlurRadius="15"
+                Direction="250"
+                Opacity="0.15"
+                ShadowDepth="0" />
+        </RadioButton.Effect>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="30" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Grid.Column="0"
+                Margin="5,0"
+                VerticalAlignment="Center"
+                Foreground="{StaticResource Foreground}"
+                Text="{Binding ElementName=UserControl, Path=Text}" />
+
+            <Grid
+                x:Name="grid"
+                Grid.Column="1"
+                Visibility="Collapsed">
+
+                <Grid.Effect>
+                    <DropShadowEffect
+                        BlurRadius="8"
+                        Direction="200"
+                        Opacity="0.1" />
+                </Grid.Effect>
+
+                <ToggleButton Style="{StaticResource Button}">
+                    <Image
+                        Height="20"
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Source="/Assets/more.png" />
+                </ToggleButton>
+            </Grid>
+        </Grid>
+    </RadioButton>
 </UserControl>

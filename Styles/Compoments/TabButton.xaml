@@ -18,7 +18,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="13">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="30">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
@@ -27,13 +27,22 @@
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FF2D353C" />
+                    <Setter Property="Background" Value="{StaticResource ControlBackground}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
 
     <Button Click="OnButtonClick" Command="{Binding ElementName=UserControl, Path=Command}">
+
+        <Button.Effect>
+            <DropShadowEffect
+                BlurRadius="10"
+                Direction="280"
+                Opacity="0.1"
+                ShadowDepth="0" />
+        </Button.Effect>
+
         <Image
             Width="{Binding ElementName=UserControl, Path=IconSize}"
             Height="{Binding ElementName=UserControl, Path=IconSize}"
