@@ -4,18 +4,30 @@ namespace BreadGPT.Commands
 {
     abstract class CommandBase : ICommand
     {
-        public event EventHandler? CanExecuteChanged;
+        private readonly Action _execute;
+        private readonly Func<bool> _canExecute;
 
-        public virtual bool CanExecute(object? parameter)
+        public event EventHandler CanExecuteChanged;
+
+        public CommandBase(Action execute, Func<bool> canExecute = null)
         {
-            return true;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
         }
 
-        public abstract void Execute(object? parameter);
-
-        protected void OnCanExecuteChanged(object? parameter)
+        public bool CanExecute(object parameter)
         {
-            CanExecuteChanged?.Invoke(this, new EventArgs());
+            return _canExecute == null || _canExecute();
+        }
+
+        public void Execute(object parameter)
+        {
+            _execute();
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }
