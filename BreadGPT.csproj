@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\close.png" />
+    <None Remove="Assets\collapse.png" />
+    <None Remove="Assets\Create.png" />
+    <None Remove="Assets\menu.png" />
+    <None Remove="Assets\send.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\close.png" />
+    <Resource Include="Assets\collapse.png" />
+    <Resource Include="Assets\create.png" />
+    <Resource Include="Assets\menu.png" />
+    <Resource Include="Assets\send.png" />
+  </ItemGroup>
+
+</Project>
