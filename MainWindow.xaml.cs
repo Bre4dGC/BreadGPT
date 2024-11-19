@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using BreadGPT.Views;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
@@ -13,6 +13,7 @@ namespace BreadGPT
         public MainWindow()
         {
             InitializeComponent();
+            Page.Content = new ChatView();
         }
 
         bool _isSidebarOpen;

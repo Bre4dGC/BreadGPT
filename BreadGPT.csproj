@@ -12,15 +12,25 @@
     <None Remove="Assets\close.png" />
     <None Remove="Assets\collapse.png" />
     <None Remove="Assets\Create.png" />
+    <None Remove="Assets\delete.png" />
     <None Remove="Assets\menu.png" />
+    <None Remove="Assets\more.png" />
+    <None Remove="Assets\pencil.png" />
     <None Remove="Assets\send.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assets\close.png" />
     <Resource Include="Assets\collapse.png" />
     <Resource Include="Assets\create.png" />
+    <Resource Include="Assets\delete.png" />
     <Resource Include="Assets\menu.png" />
+    <Resource Include="Assets\more.png" />
+    <Resource Include="Assets\pencil.png" />
     <Resource Include="Assets\send.png" />
   </ItemGroup>
 
