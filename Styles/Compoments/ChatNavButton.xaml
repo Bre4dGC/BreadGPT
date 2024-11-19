@@ -2,6 +2,7 @@
     x:Class="BreadGPT.Styles.Compoments.ChatNavButton"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:comp="clr-namespace:BreadGPT.Styles.Compoments"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:BreadGPT.Styles.Compoments"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -32,11 +33,11 @@
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#2f363d" />
+                    <Setter Property="Background" Value="#2f3740" />
                 </Trigger>
 
                 <Trigger Property="IsChecked" Value="True">
-                    <Setter Property="Background" Value="#2f363d" />
+                    <Setter Property="Background" Value="#2f3740" />
                 </Trigger>
             </Style.Triggers>
 
@@ -48,6 +49,7 @@
         </Style>
 
         <Style x:Key="Button" TargetType="ToggleButton">
+            <Setter Property="Opacity" Value="0.6" />
             <Setter Property="Height" Value="40" />
             <Setter Property="Height" Value="30" />
             <Setter Property="Cursor" Value="Hand" />
@@ -61,22 +63,21 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </UserControl.Resources>
 
     <RadioButton
         GroupName="ChatNav"
+        IsChecked="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=UserControl}}"
         MouseEnter="Button_MouseEnter"
         MouseLeave="Button_MouseLeave"
         Style="{StaticResource NavButtonStyle}">
-
-        <RadioButton.Effect>
-            <DropShadowEffect
-                BlurRadius="15"
-                Direction="250"
-                Opacity="0.15"
-                ShadowDepth="0" />
-        </RadioButton.Effect>
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -89,26 +90,30 @@
                 Margin="5,0"
                 VerticalAlignment="Center"
                 Foreground="{StaticResource Foreground}"
-                Text="{Binding ElementName=UserControl, Path=Text}" />
+                Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}}" />
 
             <Grid
                 x:Name="grid"
                 Grid.Column="1"
                 Visibility="Collapsed">
 
-                <Grid.Effect>
-                    <DropShadowEffect
-                        BlurRadius="8"
-                        Direction="200"
-                        Opacity="0.1" />
-                </Grid.Effect>
-
-                <ToggleButton Style="{StaticResource Button}">
+                <ToggleButton Click="Button_Click" Style="{StaticResource Button}">
                     <Image
                         Height="20"
                         RenderOptions.BitmapScalingMode="HighQuality"
                         Source="/Assets/more.png" />
                 </ToggleButton>
+
+                <Popup
+                    Name="MyMenuPopup"
+                    AllowsTransparency="True"
+                    Placement="Right"
+                    PlacementTarget="{Binding ElementName=MyButton}"
+                    PopupAnimation="Fade"
+                    StaysOpen="False">
+
+                    <comp:ChatButtonActions />
+                </Popup>
             </Grid>
         </Grid>
     </RadioButton>

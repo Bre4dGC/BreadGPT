@@ -14,6 +14,9 @@ namespace BreadGPT.Styles.Compoments
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Message Content
+        /// </summary>
         public string MessageContent
         {
             get => (string)GetValue(MessageContentProperty);
@@ -23,14 +26,16 @@ namespace BreadGPT.Styles.Compoments
         public static readonly DependencyProperty MessageContentProperty =
             DependencyProperty.Register(nameof(MessageContent), typeof(string), typeof(Message), new PropertyMetadata(string.Empty));
 
-        // Цвет фона сообщения
-        public Brush Background
+        /// <summary>
+        /// Message Background Color
+        /// </summary>
+        public SolidColorBrush Background
         {
-            get => (Brush)GetValue(BackgroundProperty);
+            get => (SolidColorBrush)GetValue(BackgroundProperty);
             set => SetValue(BackgroundProperty, value);
         }
 
         public static readonly DependencyProperty BackgroundProperty =
-            DependencyProperty.Register(nameof(Background), typeof(Brush), typeof(Message), new PropertyMetadata(Brushes.LightGray));
+            DependencyProperty.Register(nameof(Background), typeof(SolidColorBrush), typeof(Message), new PropertyMetadata(Brushes.LightGray));
     }
 }

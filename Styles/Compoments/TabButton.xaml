@@ -14,6 +14,7 @@
         <Style TargetType="Button">
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Margin" Value="2,7" />
+            <Setter Property="Opacity" Value="0.6" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -27,13 +28,13 @@
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource ControlBackground}" />
+                    <Setter Property="Opacity" Value="1" />
                 </Trigger>
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
 
-    <Button Click="OnButtonClick" Command="{Binding ElementName=UserControl, Path=Command}">
+    <Button Click="OnButtonClick" Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}">
 
         <Button.Effect>
             <DropShadowEffect
@@ -44,11 +45,10 @@
         </Button.Effect>
 
         <Image
-            Width="{Binding ElementName=UserControl, Path=IconSize}"
-            Height="{Binding ElementName=UserControl, Path=IconSize}"
-            Opacity="0.9"
+            Width="{Binding IconSize, RelativeSource={RelativeSource AncestorType=UserControl}}"
+            Height="{Binding IconSize, RelativeSource={RelativeSource AncestorType=UserControl}}"
             RenderOptions.BitmapScalingMode="HighQuality"
-            Source="{Binding ElementName=UserControl, Path=Icon}" />
+            Source="{Binding Icon, RelativeSource={RelativeSource AncestorType=UserControl}}" />
     </Button>
 
 </UserControl>

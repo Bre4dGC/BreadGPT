@@ -62,13 +62,6 @@
         Background="{StaticResource ControlBackground}"
         CornerRadius="25">
 
-        <Border.Effect>
-            <DropShadowEffect
-                BlurRadius="10"
-                Direction="270"
-                Opacity="0.1" />
-        </Border.Effect>
-
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -77,12 +70,15 @@
 
             <TextBlock
                 Grid.Column="0"
-                Text="Message ChatGPT"
+                Text="Message BreadGPT"
                 Visibility="{Binding ElementName=textbox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
             <TextBox x:Name="textbox" Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Button Grid.Column="1" Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}">
+            <Button
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}">
                 <Image
                     Width="22"
                     Height="22"
