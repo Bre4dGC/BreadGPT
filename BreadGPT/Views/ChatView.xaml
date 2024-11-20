@@ -6,22 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:BreadGPT.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:BreadGPT.ViewModels"
     Title="ChatView"
     d:Background="{StaticResource WindowBackground}"
     d:DesignHeight="760"
     d:DesignWidth="1100"
     mc:Ignorable="d">
 
-    <Page.DataContext>
-        <vm:ChatViewModel />
-    </Page.DataContext>
-
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="70" />
-        </Grid.RowDefinitions>
 
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel>
@@ -37,9 +28,9 @@
 
 
         <Border
-            Grid.Row="1"
+            Margin="0 0 0 15"
             HorizontalAlignment="Center"
-            VerticalAlignment="Top">
+            VerticalAlignment="Bottom">
             <comp:MessageInput Command="{Binding SelectedChat.SendMessageCommand}" Text="{Binding SelectedChat.NewMessage, UpdateSourceTrigger=PropertyChanged}" />
         </Border>
     </Grid>
