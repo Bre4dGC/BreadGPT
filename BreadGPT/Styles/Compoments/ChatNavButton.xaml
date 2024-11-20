@@ -112,7 +112,7 @@
                     PopupAnimation="Fade"
                     StaysOpen="False">
 
-                    <comp:ChatButtonActions />
+                    <comp:ChatActionPopup />
                 </Popup>
             </Grid>
         </Grid>

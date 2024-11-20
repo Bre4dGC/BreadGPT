@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="BreadGPT.Styles.Compoments.ChatButtonActions"
+    x:Class="BreadGPT.Styles.Compoments.ChatActionPopup"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:comp="clr-namespace:BreadGPT.Styles.Compoments"
