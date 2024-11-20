@@ -23,8 +23,6 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <vm:MessageBackgroundConverter x:Key="MessageBackgroundConverter" />
-
         <Style x:Key="SidebarStyle" TargetType="Border">
             <Setter Property="Width" Value="250" />
             <Setter Property="Background" Value="{StaticResource ControlBackground}" />
