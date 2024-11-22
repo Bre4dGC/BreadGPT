@@ -89,7 +89,7 @@
                         <RowDefinition Height="50" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    
+
                     <Grid Margin="5,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />

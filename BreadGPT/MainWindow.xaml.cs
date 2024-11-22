@@ -1,4 +1,7 @@
-﻿using BreadGPT.Views;
+﻿using BreadGPT.Data;
+using BreadGPT.Models;
+using BreadGPT.Services;
+using BreadGPT.Views;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
