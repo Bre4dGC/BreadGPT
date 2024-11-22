@@ -1,8 +1,7 @@
 ﻿namespace BreadGPT.Models
 {
-    public class Message
+    public class Message : DomainObject
     {
-        public Guid Id { get; set; }
         public Guid ChatId { get; set; }
         public string Text { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

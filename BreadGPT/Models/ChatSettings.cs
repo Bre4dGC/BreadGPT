@@ -1,8 +1,7 @@
 ﻿namespace BreadGPT.Models
 {
-    public class ChatSettings
+    public class ChatSettings : DomainObject
     {
-        public Guid Id { get; set; }
         public Guid ChatId { get; set; }
         public float Temperature { get; set; } = 0.7f;
         public int MaxTokens { get; set; } = 1000;
