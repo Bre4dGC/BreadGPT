@@ -1,13 +1,11 @@
-﻿using BreadGPT.Models;
-
-namespace BreadGPT.Services
+﻿namespace BreadGPT.Services
 {
-    interface IChatService
+    interface IChatService<T>
     {
-        Task<IEnumerable<Chat>> GetAllAsync();
-        Task GetAsync(Guid id);
-        Task CreateAsync(Chat chat);
-        Task UpdateAsync(Guid id, Chat chat);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<T> GetAsync(Guid id);
+        Task<T> CreateAsync(T chat);
+        Task<T> UpdateAsync(Guid id, T chat);
         Task<bool> DeleteAsync(Guid id);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
     }
 }

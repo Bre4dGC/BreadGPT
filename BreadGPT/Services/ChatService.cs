@@ -1,32 +1,70 @@
-﻿using BreadGPT.Models;
+﻿using BreadGPT.Data;
+using BreadGPT.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace BreadGPT.Services
 {
-    internal class ChatService : IChatService
+    internal class ChatService<T> : IChatService<T> where T : DomainObject 
     {
-        public Task CreateAsync(Chat chat)
+        private readonly BreadgptDbContextFactory _contextFactory;
+
+        public ChatService(BreadgptDbContextFactory contextFactory)
         {
-            throw new NotImplementedException();
+            _contextFactory = contextFactory;
         }
 
-        public Task<bool> DeleteAsync(Guid id)
+        public async Task<T> CreateAsync(T chat)
         {
-            throw new NotImplementedException();
+            using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
+            {
+                EntityEntry<T> CreatedChat = await context.Set<T>().AddAsync(chat);
+                await context.SaveChangesAsync();
+
+                return CreatedChat.Entity;
+            }
         }
 
-        public Task<IEnumerable<Chat>> GetAllAsync()
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
+            {
+                T chat = await context.Set<T>().FirstOrDefaultAsync((e) => e.Id == id);
+                context.Set<T>().Remove(chat);
+                await context.SaveChangesAsync();
+
+                return true;
+            }
         }
 
-        public Task GetAsync(Guid id)
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
+            {
+                IEnumerable<T> chats = await context.Set<T>().ToListAsync();
+                return chats;
+            }
         }
 
-        public Task UpdateAsync(Guid id, Chat chat)
+        public async Task<T> GetAsync(Guid id)
         {
-            throw new NotImplementedException();
+            using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
+            {
+                T chat = await context.Set<T>().FirstOrDefaultAsync((e) => e.Id == id);
+                return chat;
+            }
+        }
+
+        public async Task<T> UpdateAsync(Guid id, T chat)
+        {
+            using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
+            {
+                chat.Id = id;
+                context.Set<T>().Update(chat);
+                await context.SaveChangesAsync();
+
+                return chat;
+            }
         }
     }
 }
