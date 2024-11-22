@@ -7,6 +7,8 @@ namespace BreadGPT.Data
     {
         public DbSet<Chat> Chats { get; set; }
 
+        public BreadGPTDbContext(DbContextOptions options) : base(options) { }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Chat>()
@@ -20,8 +22,6 @@ namespace BreadGPT.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=.\\sqlexpress;Initial Catalog=BreadgptDB;Integrated Security=True;Trust Server Certificate=True");
-
             base.OnConfiguring(optionsBuilder);
         }
     }
