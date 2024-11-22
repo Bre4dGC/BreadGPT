@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BreadGPT.Migrations
 {
     [DbContext(typeof(BreadGPTDbContext))]
-    [Migration("20241121190353_initial")]
+    [Migration("20241122192303_initial")]
     partial class initial
     {
         /// <inheritdoc />
