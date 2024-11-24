@@ -15,23 +15,15 @@
     <Grid>
 
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
-            <StackPanel>
-                <ItemsControl ItemsSource="{Binding SelectedChat.Messages}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <comp:Message Background="{Binding IsSentByUser, Converter={StaticResource MessageBackgroundConverter}}" MessageContent="{Binding Content}" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
+            <StackPanel />
         </ScrollViewer>
 
 
         <Border
-            Margin="0 0 0 15"
+            Margin="0,0,0,15"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom">
-            <comp:MessageInput Command="{Binding SelectedChat.SendMessageCommand}" Text="{Binding SelectedChat.NewMessage, UpdateSourceTrigger=PropertyChanged}" />
+            <comp:MessageInput />
         </Border>
     </Grid>
 </Page>
