@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using BreadGPT.View;
+using System.Windows;
 
 namespace BreadGPT
 {
