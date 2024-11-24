@@ -1,0 +1,40 @@
+﻿<UserControl
+    x:Class="BreadGPT.Compoments.Message"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:BreadGPT.Compoments"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="UserControl"
+    d:DesignHeight="500"
+    d:DesignWidth="600"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style TargetType="Border">
+            <Setter Property="MaxWidth" Value="550" />
+            <Setter Property="Margin" Value="20,5,20,10" />
+            <Setter Property="CornerRadius" Value="13" />
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="15,10" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+    </UserControl.Resources>
+
+    <Border Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}">
+        <Border.Effect>
+            <DropShadowEffect
+                BlurRadius="15"
+                Direction="250"
+                Opacity="0.15"
+                ShadowDepth="0" />
+        </Border.Effect>
+
+        <TextBlock Text="{Binding MessageContent, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+    </Border>
+
+</UserControl>
