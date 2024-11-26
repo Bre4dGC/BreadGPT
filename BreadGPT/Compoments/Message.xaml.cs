@@ -29,13 +29,13 @@ namespace BreadGPT.Compoments
         /// <summary>
         /// Message Background Color
         /// </summary>
-        public SolidColorBrush Background
+        public new SolidColorBrush Background
         {
             get => (SolidColorBrush)GetValue(BackgroundProperty);
             set => SetValue(BackgroundProperty, value);
         }
 
-        public static readonly DependencyProperty BackgroundProperty =
+        public static readonly new DependencyProperty BackgroundProperty =
             DependencyProperty.Register(nameof(Background), typeof(SolidColorBrush), typeof(Message), new PropertyMetadata(Brushes.LightGray));
     }
 }

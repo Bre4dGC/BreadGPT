@@ -109,7 +109,6 @@
                     Name="MyMenuPopup"
                     AllowsTransparency="True"
                     Placement="Right"
-                    PlacementTarget="{Binding ElementName=MyButton}"
                     PopupAnimation="Fade"
                     StaysOpen="False">
 

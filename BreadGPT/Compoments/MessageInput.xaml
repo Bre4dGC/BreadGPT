@@ -24,7 +24,7 @@
         <Style TargetType="TextBox">
             <Setter Property="MaxHeight" Value="200" />
             <Setter Property="FontSize" Value="16" />
-            <Setter Property="Padding" Value="20,10,0,11" />
+            <Setter Property="Padding" Value="20,10,0,12" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="Foreground" Value="{StaticResource Foreground}" />
@@ -82,7 +82,7 @@
                 x:Name="textbox"
                 Width="620"
                 MinHeight="50"
-                Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 TextWrapping="Wrap" />
 
             <Button Grid.Column="1" Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}">
