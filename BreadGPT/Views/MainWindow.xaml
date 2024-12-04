@@ -69,16 +69,16 @@
                         VerticalScrollBarVisibility="Auto">
 
                         <StackPanel Margin="10">
-                            <ItemsControl ItemsSource="{Binding Chats}">
-                                <ItemsControl.ItemTemplate>
+                            <ListBox ItemsSource="{Binding Chats}" SelectedItem="{Binding SelectedChat}">
+                                <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <comp:ChatNavButton
                                             Command="{Binding SelectChatCommand}"
                                             IsChecked="True"
                                             Text="{Binding Title}" />
                                     </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
@@ -139,7 +139,7 @@
                         
                         <ScrollViewer  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
                             <StackPanel>
-                                <ItemsControl ItemsSource="{Binding Messages}">
+                                <ItemsControl ItemsSource="{Binding SelectedChat.Messages}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <comp:Message x:Name="Message" Background="{Binding MessageSender, Converter={StaticResource MessageBackgroundConverter}}" MessageContent="{Binding Text}" />
