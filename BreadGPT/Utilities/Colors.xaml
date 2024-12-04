@@ -2,6 +2,7 @@
 
     <SolidColorBrush x:Key="WindowBackground" Color="#21262C" />
     <SolidColorBrush x:Key="ControlBackground" Color="#282E34" />
+    <SolidColorBrush x:Key="AnswerBackground" Color="#2e3945" />
     <SolidColorBrush x:Key="Foreground" Color="#dee2e6" />
 
 </ResourceDictionary>
