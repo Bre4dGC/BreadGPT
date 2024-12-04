@@ -23,8 +23,6 @@ namespace BreadGPT.Compoments
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register(nameof(Text), typeof(string), typeof(ChatNavButton));
 
-
-
         /// <summary>
         /// Button Command
         /// </summary>
@@ -37,8 +35,6 @@ namespace BreadGPT.Compoments
         public static readonly DependencyProperty ButtonCommandProperty =
         DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(ChatNavButton), new PropertyMetadata(null));
 
-
-
         /// <summary>
         /// Button IsChecked
         /// </summary>
@@ -50,8 +46,6 @@ namespace BreadGPT.Compoments
 
         public static readonly DependencyProperty CheckedProperty =
             DependencyProperty.Register(nameof(IsChecked), typeof(bool), typeof(ChatNavButton));
-
-
 
         #region Action menu Visibility
         private void Button_MouseEnter(object sender, MouseEventArgs e)

@@ -34,8 +34,8 @@
         </Style>
 
         <Style TargetType="Button">
-            <Setter Property="Width" Value="42" />
-            <Setter Property="Height" Value="42" />
+            <Setter Property="Width" Value="38" />
+            <Setter Property="Height" Value="38" />
             <Setter Property="Opacity" Value="0.6" />
             <Setter Property="Margin" Value="5" />
             <Setter Property="Cursor" Value="Hand" />
@@ -65,7 +65,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Border Background="{StaticResource ControlBackground}" CornerRadius="27">
+    <Border MinHeight="48" Background="{StaticResource ControlBackground}" CornerRadius="25">
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -81,8 +81,8 @@
             <TextBox
                 x:Name="textbox"
                 Width="620"
-                MinHeight="50"
-                Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                MinHeight="45"
+                Text="{Binding Text, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 TextWrapping="Wrap" />
 
             <Button Grid.Column="1" Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}">

@@ -98,7 +98,12 @@
                 Grid.Column="1"
                 Visibility="Collapsed">
 
-                <ToggleButton Click="Button_Click" Style="{StaticResource Button}">
+                <ToggleButton
+                    Click="Button_Click"
+                    Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                    CommandParameter="{Binding}"
+                    IsChecked="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                    Style="{StaticResource Button}">
                     <Image
                         Height="20"
                         RenderOptions.BitmapScalingMode="HighQuality"

@@ -15,13 +15,14 @@
             <Setter Property="MaxWidth" Value="550" />
             <Setter Property="Margin" Value="20,5,20,10" />
             <Setter Property="CornerRadius" Value="13" />
+            <Setter Property="HorizontalAlignment" Value="Right"/>
         </Style>
 
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="15,10" />
             <Setter Property="FontSize" Value="14" />
             <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Foreground" Value="{StaticResource Foreground}" />
         </Style>
     </UserControl.Resources>
 
@@ -29,8 +30,7 @@
         <Border.Effect>
             <DropShadowEffect
                 BlurRadius="15"
-                Direction="250"
-                Opacity="0.15"
+                Opacity="0.05"
                 ShadowDepth="0" />
         </Border.Effect>
 
