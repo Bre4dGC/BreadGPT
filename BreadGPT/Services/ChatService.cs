@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace BreadGPT.Services
 {
-    internal class ChatService<T> : IChatService<T> where T : DomainObject 
+    internal class ChatService : IChatService
     {
         private readonly BreadgptDbContextFactory _contextFactory;
 
@@ -14,53 +14,53 @@ namespace BreadGPT.Services
             _contextFactory = contextFactory;
         }
 
-        public async Task<T> CreateAsync(T chat)
+        public async Task<Chat> Create(Chat chat)
         {
             using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
             {
-                EntityEntry<T> CreatedChat = await context.Set<T>().AddAsync(chat);
+                EntityEntry<Chat> CreatedChat = await context.Set<Chat>().AddAsync(chat);
                 await context.SaveChangesAsync();
 
                 return CreatedChat.Entity;
             }
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> Delete(Guid id)
         {
             using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
             {
-                T chat = await context.Set<T>().FirstOrDefaultAsync((e) => e.Id == id);
-                context.Set<T>().Remove(chat);
+                Chat chat = await context.Set<Chat>().FirstOrDefaultAsync((e) => e.Id == id);
+                context.Set<Chat>().Remove(chat);
                 await context.SaveChangesAsync();
 
                 return true;
             }
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<Chat>> GetAll()
         {
             using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
             {
-                IEnumerable<T> chats = await context.Set<T>().ToListAsync();
+                IEnumerable<Chat> chats = await context.Set<Chat>().ToListAsync();
                 return chats;
             }
         }
 
-        public async Task<T> GetAsync(Guid id)
+        public async Task<Chat> Get(Guid id)
         {
             using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
             {
-                T chat = await context.Set<T>().FirstOrDefaultAsync((e) => e.Id == id);
+                Chat chat = await context.Set<Chat>().FirstOrDefaultAsync((e) => e.Id == id);
                 return chat;
             }
         }
 
-        public async Task<T> UpdateAsync(Guid id, T chat)
+        public async Task<Chat> Update(Guid id, Chat chat)
         {
             using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
             {
                 chat.Id = id;
-                context.Set<T>().Update(chat);
+                context.Set<Chat>().Update(chat);
                 await context.SaveChangesAsync();
 
                 return chat;
