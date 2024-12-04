@@ -5,6 +5,7 @@
     xmlns:comp="clr-namespace:BreadGPT.Compoments"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:style="clr-namespace:BreadGPT.Styles"
     xmlns:vm="clr-namespace:BreadGPT.ViewModels"
     x:Name="Window"
     Title="MainWindow"
@@ -17,7 +18,13 @@
     WindowStyle="None"
     mc:Ignorable="d">
 
-    <Window.Resources>        
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+
+    <Window.Resources>
+        <style:MessageBackgroundConverter x:Key="MessageBackgroundConverter" />
+
         <Style x:Key="SidebarStyle" TargetType="Border">
             <Setter Property="Width" Value="250" />
             <Setter Property="Background" Value="{StaticResource ControlBackground}" />
@@ -66,7 +73,7 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <comp:ChatNavButton
-                                            Command="{Binding DataContext.SelectChatCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                            Command="{Binding SelectChatCommand}"
                                             IsChecked="True"
                                             Text="{Binding Title}" />
                                     </DataTemplate>
@@ -125,7 +132,40 @@
                     </Grid>
 
                     <Grid Grid.Row="1">
-                        <Frame x:Name="Page" NavigationUIVisibility="Hidden" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        
+                        <ScrollViewer  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                            <StackPanel>
+                                <ItemsControl ItemsSource="{Binding Messages}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <comp:Message x:Name="Message" Background="{Binding MessageSender, Converter={StaticResource MessageBackgroundConverter}}" MessageContent="{Binding Text}" />
+
+                                            <DataTemplate.Triggers>
+                                                <DataTrigger Binding="{Binding Path=IsSendByUser}" Value="False">
+                                                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                                                    <Setter TargetName="Message" Property="Background" Value="{StaticResource AnswerBackground}"/>
+                                                </DataTrigger>
+                                            </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ScrollViewer>
+
+
+                        <Border
+                            Grid.Row="1"
+                            Margin="0,0,0,15"
+                            Background="Transparent"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom">
+                            <comp:MessageInput
+                            Grid.Row="1" Command="{Binding SendMessageCommand}" Text="{Binding TextMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Border>
                     </Grid>
                 </Grid>
             </Border>

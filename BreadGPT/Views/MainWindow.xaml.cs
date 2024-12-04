@@ -1,5 +1,4 @@
-﻿using BreadGPT.ViewModels;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
@@ -13,10 +12,6 @@ namespace BreadGPT.View
         public MainWindow()
         {
             InitializeComponent();
-            //Page.Content = new ChatView();
-
-            var navigationService = Page.NavigationService;
-            DataContext = new MainViewModel(navigationService);
         }
 
         bool _isSidebarOpen;

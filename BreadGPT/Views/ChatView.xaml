@@ -3,11 +3,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:comp="clr-namespace:BreadGPT.Compoments"
-    xmlns:style="clr-namespace:BreadGPT.Styles"
-    xmlns:vm="clr-namespace:BreadGPT.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:BreadGPT.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:style="clr-namespace:BreadGPT.Styles"
+    xmlns:vm="clr-namespace:BreadGPT.ViewModels"
     Title="ChatView"
     d:Background="{StaticResource WindowBackground}"
     d:DesignHeight="760"
@@ -19,13 +19,12 @@
     </Page.Resources>
 
     <Grid>
-
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <ItemsControl ItemsSource="{Binding CurrentChat.Messages}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <comp:Message MessageContent="{Binding Content}" Background="{Binding MessageSender, Converter={StaticResource MessageBackgroundConverter}}" />
+                            <comp:Message Background="{Binding MessageSender, Converter={StaticResource MessageBackgroundConverter}}" MessageContent="{Binding Content}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -37,7 +36,7 @@
             Margin="0,0,0,15"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom">
-            <comp:MessageInput Text="{Binding NewMessage}" Command="{Binding SendMessageCommand}"/>
+            <comp:MessageInput Command="{Binding SendMessageCommand}" Text="{Binding NewMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </Border>
     </Grid>
 </Page>
