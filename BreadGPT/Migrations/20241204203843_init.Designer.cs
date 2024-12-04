@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BreadGPT.Migrations
 {
     [DbContext(typeof(BreadGPTDbContext))]
-    [Migration("20241122192303_initial")]
-    partial class initial
+    [Migration("20241204203843_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,7 @@ namespace BreadGPT.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("LastMessageAt")
+                    b.Property<DateTime>("LastMessageAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
@@ -46,33 +46,6 @@ namespace BreadGPT.Migrations
                     b.ToTable("Chats");
                 });
 
-            modelBuilder.Entity("BreadGPT.Models.ChatSettings", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ChatId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("MaxTokens")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Model")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Temperature")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChatId")
-                        .IsUnique();
-
-                    b.ToTable("ChatSettings");
-                });
-
             modelBuilder.Entity("BreadGPT.Models.Message", b =>
                 {
                     b.Property<Guid>("Id")
@@ -82,14 +55,8 @@ namespace BreadGPT.Migrations
                     b.Property<Guid>("ChatId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Sender")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsSendByUser")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -100,17 +67,6 @@ namespace BreadGPT.Migrations
                     b.HasIndex("ChatId");
 
                     b.ToTable("Message");
-                });
-
-            modelBuilder.Entity("BreadGPT.Models.ChatSettings", b =>
-                {
-                    b.HasOne("BreadGPT.Models.Chat", "Chat")
-                        .WithOne("Settings")
-                        .HasForeignKey("BreadGPT.Models.ChatSettings", "ChatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Chat");
                 });
 
             modelBuilder.Entity("BreadGPT.Models.Message", b =>
@@ -127,9 +83,6 @@ namespace BreadGPT.Migrations
             modelBuilder.Entity("BreadGPT.Models.Chat", b =>
                 {
                     b.Navigation("Messages");
-
-                    b.Navigation("Settings")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
