@@ -20,7 +20,7 @@ public class MistralClient : IMistralClient
         _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
     }
 
-    public async Task<ChatResponse> CompleteAsync(Completion completion, CancellationToken cancellationToken = default!)
+    public async Task<string> CompleteAsync(Completion completion, CancellationToken cancellationToken = default!)
     {
         var settings = new JsonSerializerSettings()
         {
@@ -49,6 +49,6 @@ public class MistralClient : IMistralClient
         var contentResponse = await responseMessage.Content.ReadAsStringAsync(cancellationToken);
 
         var chatResponse = JsonConvert.DeserializeObject<ChatResponse>(contentResponse, settings);
-        return chatResponse!;
+        return chatResponse.Choices[0].Message.Content!;
     }
 }

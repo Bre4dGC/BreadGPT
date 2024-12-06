@@ -4,5 +4,5 @@ namespace Mistral;
 
 public interface IMistralClient
 {
-    Task<ChatResponse> CompleteAsync(Completion completion, CancellationToken cancellationToken = default!);
+    Task<string> CompleteAsync(Completion completion, CancellationToken cancellationToken = default!);
 }
