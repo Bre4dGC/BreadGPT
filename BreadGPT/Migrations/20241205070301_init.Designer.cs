@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BreadGPT.Migrations
 {
     [DbContext(typeof(BreadGPTDbContext))]
-    [Migration("20241204203843_init")]
+    [Migration("20241205070301_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -30,9 +30,6 @@ namespace BreadGPT.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastMessageAt")
                         .HasColumnType("datetime2");

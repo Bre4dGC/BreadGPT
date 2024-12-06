@@ -17,7 +17,6 @@ namespace BreadGPT.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastMessageAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
