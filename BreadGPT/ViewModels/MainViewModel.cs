@@ -15,8 +15,12 @@ namespace BreadGPT.ViewModels
         private IMessageService _messageService = new MessageService(new BreadgptDbContextFactory());
         private MistralClient _mistralClient = new MistralClient("r15uvSJsdSTGKygysJWuJqKRZjQGAKEm");
 
-        public ObservableCollection<Chat> Chats { get; } = new ObservableCollection<Chat>();
-        public ObservableCollection<Message> Messages { get; } = new ObservableCollection<Message>();
+        private ObservableCollection<Chat> _chats { get; set; }
+        public ObservableCollection<Chat> Chats
+        {
+            get { return _chats; }
+            set { _chats = value; OnPropertyChanged(); }
+        }
 
         private Chat _selectedChat;
         public Chat SelectedChat
@@ -25,24 +29,35 @@ namespace BreadGPT.ViewModels
             set { _selectedChat = value; OnPropertyChanged(); }
         }
 
-        private string _newMessage;
+        private Message _message;
+
+        public Message Message
+        {
+            get { return _message; }
+            set { _message = value; }
+        }
+
+        private string _textMessage;
         public string TextMessage
         {
-            get { return _newMessage; }
-            set { _newMessage = value; OnPropertyChanged(); }
+            get { return _textMessage; }
+            set { _textMessage = value; OnPropertyChanged(); }
         }
 
         public ICommand CreateChatCommand { get; }
         public ICommand RenameChatCommand { get; }
         public ICommand DeleteChatCommand { get; }
-        public ICommand SelectChatCommand { get; }
         public ICommand SendMessageCommand { get; }
+        public ICommand SelectChatCommand { get; }
 
         public MainViewModel()
         {
+            _chats = new ObservableCollection<Chat>();
+
             CreateChatCommand = new RelayCommand(CreateChat);
             RenameChatCommand = new RelayCommand(RenameChat);
             DeleteChatCommand = new RelayCommand(DeleteChat);
+            SelectChatCommand = new RelayCommand(SelectChat);
             SendMessageCommand = new RelayCommand(SendMessage);
 
             LoadChats();
@@ -50,28 +65,24 @@ namespace BreadGPT.ViewModels
 
         private void CreateChat()
         {
+            if (Chats.Count > 0 && SelectedChat.Messages.Count == 0) return;
             if (Chats.Count == 10) { MessageBox.Show("You have increased the maximum number of chats"); return; }
-
-            //Message msg = new Message
-            //{
-            //    Id = Guid.NewGuid(),
-            //    Text = "Text",
-            //    Sender = MessageSender.User,
-            //};
-
-            //var list = new List<Message> { msg };
 
             _chatService.Create(
                 SelectedChat = new Chat
                 {
                     Id = Guid.NewGuid(),
                     Title = $"New Chat {Chats.Count + 1}",
-                    CreatedAt = DateTime.UtcNow,
                     LastMessageAt = DateTime.UtcNow
                 });            
 
             Chats.Add(SelectedChat);
             SortChats();
+        }
+
+        private void SelectChat()
+        {
+            LoadMessages();
         }
 
         private async void LoadChats()
@@ -97,6 +108,8 @@ namespace BreadGPT.ViewModels
             {
                 Chats.Add(chat);
             }
+
+            SelectedChat = Chats[0];
         }
 
         private void RenameChat()
@@ -109,47 +122,66 @@ namespace BreadGPT.ViewModels
 
         }
 
-        private async Task LoadMessages()
+        private async void LoadMessages()
         {
-            IEnumerable<Message> messages = await _messageService.GetAllAsync();
+            //IEnumerable<Message> messages = await _messageService.GetAllAsync(SelectedChat);
 
-            if (messages.Count() == 0) return;
+            //if (messages.Count() == 0) return;
 
-            foreach (var message in messages)
+            //SelectedChat.Messages = (ObservableCollection<Message>)messages;
+
+            Message = new Message
             {
-                SelectedChat.Messages.Add(message);
-            }
+                Id = Guid.NewGuid(),
+                Text = "message",
+                IsSendByUser = true,
+                ChatId = SelectedChat.Id,
+            };
+
+            SelectedChat.Messages.Add(Message);
         }
 
         private async void SendMessage()
         {
             if (string.IsNullOrWhiteSpace(TextMessage)) return;
+            if (SelectedChat.Messages.Count == 10) return;
 
             var message = TextMessage;
             TextMessage = string.Empty;
 
-            Message msg = new Message
+            Message = new Message
             {
                 Id = Guid.NewGuid(),
                 Text = message,
                 IsSendByUser = true,
+                ChatId = SelectedChat.Id,
             };
 
-            Messages.Add(msg);
+            await _messageService.SendAsync(Message);
+
+            SelectedChat.Messages.Add(Message);
+            SelectedChat.LastMessageAt = DateTime.UtcNow;
+
+            SortChats();
 
             await GetResponse(message);
         }
 
         private async Task GetResponse(string message)
         {
-            Message msg = new Message
+            Message = new Message
             {
                 Id = Guid.NewGuid(),
-                Text = await PostRequest(message),
+                Text = "",
                 IsSendByUser = false,
+                ChatId = SelectedChat.Id,
             };
 
-            Messages.Add(msg);
+            SelectedChat.Messages.Add(Message);
+
+            Message.Text = await PostRequest(message);
+
+            await _messageService.SendAsync(Message);
         }
 
         private async Task<string> PostRequest(string message)
@@ -161,7 +193,7 @@ namespace BreadGPT.ViewModels
                         Messages = [new() { Role = "user", Content = message }]
                     });
 
-            return answer.Choices[0].Message.Content;
+            return answer;
         }
     }
 }
