@@ -74,8 +74,10 @@
     </UserControl.Resources>
 
     <RadioButton
+        Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
+        CommandParameter="{Binding}"
         GroupName="ChatNav"
-        IsChecked="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=UserControl}}"
+        IsChecked="{Binding IsChecked, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=UserControl}}"
         MouseEnter="Button_MouseEnter"
         MouseLeave="Button_MouseLeave"
         Style="{StaticResource NavButtonStyle}">
@@ -98,12 +100,7 @@
                 Grid.Column="1"
                 Visibility="Collapsed">
 
-                <ToggleButton
-                    Click="Button_Click"
-                    Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                    CommandParameter="{Binding}"
-                    IsChecked="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                    Style="{StaticResource Button}">
+                <ToggleButton Click="Button_Click" Style="{StaticResource Button}">
                     <Image
                         Height="20"
                         RenderOptions.BitmapScalingMode="HighQuality"

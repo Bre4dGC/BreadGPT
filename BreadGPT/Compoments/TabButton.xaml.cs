@@ -45,7 +45,7 @@ namespace BreadGPT.Compoments
             set { SetValue(SizeProperty, value); }
         }
 
-        public static readonly new DependencyProperty SizeProperty =
+        public static readonly DependencyProperty SizeProperty =
             DependencyProperty.Register(nameof(IconSize), typeof(int), typeof(TabButton));
 
         /// <summary>
@@ -55,7 +55,6 @@ namespace BreadGPT.Compoments
 
         private void OnButtonClick(object sender, RoutedEventArgs e)
         {
-            // Вызов события, если есть подписчики
             ButtonClicked?.Invoke(this, e);
         }
     }

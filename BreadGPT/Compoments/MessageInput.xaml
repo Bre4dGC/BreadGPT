@@ -65,7 +65,10 @@
         </Style>
     </UserControl.Resources>
 
-    <Border MinHeight="48" Background="{StaticResource ControlBackground}" CornerRadius="25">
+    <Border
+        MinHeight="48"
+        Background="{StaticResource ControlBackground}"
+        CornerRadius="25">
 
         <Grid>
             <Grid.ColumnDefinitions>

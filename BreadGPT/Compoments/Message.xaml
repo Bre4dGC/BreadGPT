@@ -12,10 +12,9 @@
 
     <UserControl.Resources>
         <Style TargetType="Border">
-            <Setter Property="MaxWidth" Value="550" />
-            <Setter Property="Margin" Value="20,5,20,10" />
+            <Setter Property="MaxWidth" Value="650" />
+            <Setter Property="Margin" Value="20,8" />
             <Setter Property="CornerRadius" Value="13" />
-            <Setter Property="HorizontalAlignment" Value="Right"/>
         </Style>
 
         <Style TargetType="TextBlock">
@@ -27,13 +26,6 @@
     </UserControl.Resources>
 
     <Border Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}">
-        <Border.Effect>
-            <DropShadowEffect
-                BlurRadius="15"
-                Opacity="0.05"
-                ShadowDepth="0" />
-        </Border.Effect>
-
         <TextBlock Text="{Binding MessageContent, RelativeSource={RelativeSource AncestorType=UserControl}}" />
     </Border>
 

@@ -36,6 +36,6 @@ namespace BreadGPT.Compoments
         }
 
         public static readonly new DependencyProperty BackgroundProperty =
-            DependencyProperty.Register(nameof(Background), typeof(SolidColorBrush), typeof(Message), new PropertyMetadata(new BrushConverter().ConvertFrom("#282E34")));
+            DependencyProperty.Register(nameof(Background), typeof(SolidColorBrush), typeof(Message));
     }
 }
