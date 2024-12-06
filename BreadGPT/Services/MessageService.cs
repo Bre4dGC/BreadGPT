@@ -13,12 +13,11 @@ namespace BreadGPT.Services
             _contextFactory = contextFactory;
         }
 
-        public async Task<IEnumerable<Message>> GetAllAsync()
+        public async Task<IEnumerable<Message>> GetAllAsync(Chat chat)
         {
             using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
             {
-                IEnumerable<Message> messages = await context.Set<Message>().ToListAsync();
-                return messages;
+                return await context.Set<Message>().Where(m => m.ChatId == chat.Id).ToListAsync();
             }
         }
 
