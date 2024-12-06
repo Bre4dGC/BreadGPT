@@ -4,8 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:comp="clr-namespace:BreadGPT.Compoments"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:i1="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
+    xmlns:i2="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:style="clr-namespace:BreadGPT.Styles"
+    xmlns:style="clr-namespace:BreadGPT.Utilities"
     xmlns:vm="clr-namespace:BreadGPT.ViewModels"
     x:Name="Window"
     Title="MainWindow"
@@ -23,7 +26,7 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <style:MessageBackgroundConverter x:Key="MessageBackgroundConverter" />
+        <style:EqualityConverter x:Key="EqualityConverter" />
 
         <Style x:Key="SidebarStyle" TargetType="Border">
             <Setter Property="Width" Value="250" />
@@ -47,6 +50,115 @@
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Foreground" Value="{StaticResource Foreground}" />
         </Style>
+
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Margin" Value="0,0,0,7" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="7">
+                            <ContentPresenter
+                                Margin="5,0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#2f3740" />
+                </Trigger>
+
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#2f3740" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="{StaticResource Foreground}" />
+        </Style>
+
+        <Style x:Key="Button" TargetType="ToggleButton">
+            <Setter Property="Opacity" Value="0.6" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="7">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <DataTemplate x:Key="ChatTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="30" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Grid.Column="0"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Foreground="{StaticResource Foreground}"
+                    Text="{Binding Title}" />
+
+                <Grid Grid.Column="1" Visibility="Collapsed">
+
+                    <ToggleButton Style="{StaticResource Button}">
+                        <Image
+                            Height="20"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="/Assets/more.png" />
+                    </ToggleButton>
+
+                    <Popup
+                        Name="MyMenuPopup"
+                        AllowsTransparency="True"
+                        Placement="Right"
+                        PopupAnimation="Fade"
+                        StaysOpen="False">
+
+                        <comp:ChatActionPopup />
+                    </Popup>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MessagesTemplate">
+            <comp:Message x:Name="Message" MessageContent="{Binding Text}" />
+
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=IsSendByUser}" Value="True">
+                    <Setter Property="HorizontalAlignment" Value="Right" />
+                    <Setter TargetName="Message" Property="Background" Value="{StaticResource AnswerBackground}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsSendByUser}" Value="False">
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter TargetName="Message" Property="Background" Value="{StaticResource ControlBackground}" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
     </Window.Resources>
 
     <Border Background="{StaticResource WindowBackground}" CornerRadius="7">
@@ -63,24 +175,14 @@
                         Style="{StaticResource Logo}"
                         Text="BreadGPT" />
 
-                    <ScrollViewer
-                        Grid.Row="1"
-                        HorizontalScrollBarVisibility="Hidden"
-                        VerticalScrollBarVisibility="Auto">
-
-                        <StackPanel Margin="10">
-                            <ListBox ItemsSource="{Binding Chats}" SelectedItem="{Binding SelectedChat}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <comp:ChatNavButton
-                                            Command="{Binding SelectChatCommand}"
-                                            IsChecked="True"
-                                            Text="{Binding Title}" />
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                    </ScrollViewer>
+                    <Border Grid.Row="1" Margin="10">
+                        <ListBox
+                            Background="Transparent"
+                            BorderThickness="0"
+                            ItemTemplate="{DynamicResource ChatTemplate}"
+                            ItemsSource="{Binding Chats}"
+                            SelectedItem="{Binding SelectedChat, Mode=TwoWay}"/>
+                    </Border>
                 </Grid>
             </Border>
 
@@ -136,35 +238,23 @@
                             <RowDefinition Height="1*" />
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
-                        
-                        <ScrollViewer  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
-                            <StackPanel>
-                                <ItemsControl ItemsSource="{Binding SelectedChat.Messages}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <comp:Message x:Name="Message" Background="{Binding MessageSender, Converter={StaticResource MessageBackgroundConverter}}" MessageContent="{Binding Text}" />
 
-                                            <DataTemplate.Triggers>
-                                                <DataTrigger Binding="{Binding Path=IsSendByUser}" Value="False">
-                                                    <Setter Property="HorizontalAlignment" Value="Left"/>
-                                                    <Setter TargetName="Message" Property="Background" Value="{StaticResource AnswerBackground}"/>
-                                                </DataTrigger>
-                                            </DataTemplate.Triggers>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                            <StackPanel>
+                                <ItemsControl ItemTemplate="{DynamicResource MessagesTemplate}" ItemsSource="{Binding SelectedChat.Messages}" />
                             </StackPanel>
                         </ScrollViewer>
-
 
                         <Border
                             Grid.Row="1"
                             Margin="0,0,0,15"
-                            Background="Transparent"
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Bottom">
+                            VerticalAlignment="Bottom"
+                            Background="Transparent">
                             <comp:MessageInput
-                            Grid.Row="1" Command="{Binding SendMessageCommand}" Text="{Binding TextMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                Grid.Row="1"
+                                Command="{Binding SendMessageCommand}"
+                                Text="{Binding TextMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Border>
                     </Grid>
                 </Grid>
