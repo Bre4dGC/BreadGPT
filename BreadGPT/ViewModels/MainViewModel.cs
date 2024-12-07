@@ -124,19 +124,19 @@ namespace BreadGPT.ViewModels
 
         private async void LoadMessages()
         {
-            //IEnumerable<Message> messages = await _messageService.GetAllAsync(SelectedChat);
+            IEnumerable<Message> messages = await _messageService.GetAllAsync(SelectedChat);
 
-            //if (messages.Count() == 0) return;
+            if (messages.Count() == 0) return;
 
-            //SelectedChat.Messages = (ObservableCollection<Message>)messages;
+            SelectedChat.Messages = (ObservableCollection<Message>)messages;
 
-            Message = new Message
-            {
-                Id = Guid.NewGuid(),
-                Text = "message",
-                IsSendByUser = true,
-                ChatId = SelectedChat.Id,
-            };
+            //Message = new Message
+            //{
+            //    Id = Guid.NewGuid(),
+            //    Text = "message",
+            //    IsSendByUser = true,
+            //    ChatId = SelectedChat.Id,
+            //};
 
             SelectedChat.Messages.Add(Message);
         }

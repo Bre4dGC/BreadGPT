@@ -46,7 +46,7 @@
               "RelativeDocumentMoniker": "BreadGPT\\ViewModels\\MainViewModel.cs",
               "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\ViewModels\\MainViewModel.cs",
               "RelativeToolTip": "BreadGPT\\ViewModels\\MainViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAJIAAAAAAAAAAAAowIoAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T20:06:14.49Z",
               "IsPinned": true,
@@ -58,8 +58,8 @@
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Views\\MainWindow.xaml",
               "RelativeDocumentMoniker": "BreadGPT\\Views\\MainWindow.xaml",
-              "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Views\\MainWindow.xaml*",
-              "RelativeToolTip": "BreadGPT\\Views\\MainWindow.xaml*",
+              "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Views\\MainWindow.xaml",
+              "RelativeToolTip": "BreadGPT\\Views\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-12-05T07:16:46.112Z",
               "IsPinned": true,
@@ -83,8 +83,7 @@
               "RelativeToolTip": "BreadGPT\\Views\\MainWindow.xaml.cs",
               "ViewState": "AgIAACEAAAAAAAAAAAAowEEAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T18:23:35.679Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-06T18:23:35.679Z"
             },
             {
               "$type": "Document",
@@ -96,8 +95,7 @@
               "RelativeToolTip": "BreadGPT\\Compoments\\ChatNavButton.xaml.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAgwDEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T18:23:24.588Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-06T18:23:24.588Z"
             },
             {
               "$type": "Document",
@@ -108,28 +106,25 @@
               "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Compoments\\ChatNavButton.xaml",
               "RelativeToolTip": "BreadGPT\\Compoments\\ChatNavButton.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-05T07:21:52.326Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-05T07:21:52.326Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "dbo.Message [\u0414\u0430\u043D\u043D\u044B\u0435]",
+              "Title": "dbo.Message.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BreadGPTDB/True/SqlTable/dbo.Message.sql",
-              "ToolTip": "dbo.Message [\u0414\u0430\u043D\u043D\u044B\u0435]",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BreadGPTDB/True/SqlTable/dbo.Message.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-12-06T17:22:35.64Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-06T17:22:35.64Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "dbo.Chats [\u0414\u0430\u043D\u043D\u044B\u0435]",
+              "Title": "dbo.Chats.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BreadGPTDB/True/SqlTable/dbo.Chats.sql",
-              "ToolTip": "dbo.Chats [\u0414\u0430\u043D\u043D\u044B\u0435]",
+              "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BreadGPTDB/True/SqlTable/dbo.Chats.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-12-06T18:46:22.498Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-06T18:46:22.498Z"
             }
           ]
         }
