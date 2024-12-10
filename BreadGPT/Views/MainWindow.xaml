@@ -13,6 +13,7 @@
     Height="760"
     AllowsTransparency="True"
     Background="Transparent"
+    KeyDown="Window_KeyDown"
     MouseLeftButtonDown="Window_MouseLeftButtonDown"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
@@ -178,7 +179,7 @@
                             BorderThickness="0"
                             ItemTemplate="{DynamicResource ChatTemplate}"
                             ItemsSource="{Binding Chats}"
-                            SelectedItem="{Binding SelectedChat, Mode=TwoWay}"/>
+                            SelectedItem="{Binding SelectedChat, Mode=TwoWay}" />
                     </Border>
                 </Grid>
             </Border>
@@ -249,7 +250,9 @@
                             VerticalAlignment="Bottom"
                             Background="Transparent">
                             <comp:MessageInput
+                                x:Name="Input"
                                 Grid.Row="1"
+                                Enabled="{Binding SendButtonEnabled}"
                                 Command="{Binding SendMessageCommand}"
                                 Text="{Binding TextMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Border>

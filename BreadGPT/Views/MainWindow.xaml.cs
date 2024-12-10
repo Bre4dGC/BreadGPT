@@ -64,5 +64,13 @@ namespace BreadGPT.View
             if (e.ButtonState == MouseButtonState.Pressed)
                 DragMove();
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                Input.Command.Execute(null);
+            }
+        }
     }
 }
