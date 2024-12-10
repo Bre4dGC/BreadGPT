@@ -11,14 +11,18 @@
       "RelativeMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|solutionrelative:breadgpt\\services\\messageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|p:\\c# proj\\wpf\\breadgpt\\breadgpt\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|solutionrelative:breadgpt\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BreadGPTDB/True/SqlTable/dbo.Chats.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BreadGPTDB/True/SqlTable/dbo.Message.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|p:\\c# proj\\wpf\\breadgpt\\breadgpt\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|solutionrelative:breadgpt\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|p:\\c# proj\\wpf\\breadgpt\\breadgpt\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|solutionrelative:breadgpt\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,9 +40,9 @@
               "Title": "MainViewModel.cs",
               "DocumentMoniker": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\ViewModels\\MainViewModel.cs",
               "RelativeDocumentMoniker": "BreadGPT\\ViewModels\\MainViewModel.cs",
-              "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\ViewModels\\MainViewModel.cs*",
-              "RelativeToolTip": "BreadGPT\\ViewModels\\MainViewModel.cs*",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAYwHYAAAAJAAAAAAAAAA==",
+              "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "BreadGPT\\ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAAIYAAAAAAAAAAAAqwH8AAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T20:06:14.49Z",
               "IsPinned": true,
@@ -60,34 +64,47 @@
               "RelativeDocumentMoniker": "BreadGPT\\Services\\MessageService.cs",
               "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Services\\MessageService.cs",
               "RelativeToolTip": "BreadGPT\\Services\\MessageService.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAYAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-09T21:52:06.017Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "dbo.Message [\u0414\u0430\u043D\u043D\u044B\u0435]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BreadGPTDB/True/SqlTable/dbo.Message.sql",
               "ToolTip": "dbo.Message [\u0414\u0430\u043D\u043D\u044B\u0435]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-12-09T19:57:37.866Z",
+              "WhenOpened": "2024-12-10T18:09:51.464Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Message.cs",
+              "DocumentMoniker": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Models\\Message.cs",
+              "RelativeDocumentMoniker": "BreadGPT\\Models\\Message.cs",
+              "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Models\\Message.cs",
+              "RelativeToolTip": "BreadGPT\\Models\\Message.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-10T18:00:27.864Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "dbo.Chats [\u0414\u0430\u043D\u043D\u044B\u0435]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BreadGPTDB/True/SqlTable/dbo.Chats.sql",
+              "ToolTip": "dbo.Chats [\u0414\u0430\u043D\u043D\u044B\u0435]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-12-10T17:55:49.627Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "dbo.Chats [\u0414\u0430\u043D\u043D\u044B\u0435]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BreadGPTDB/True/SqlTable/dbo.Chats.sql",
-              "ToolTip": "dbo.Chats [\u0414\u0430\u043D\u043D\u044B\u0435]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-12-09T22:16:27.772Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Views\\MainWindow.xaml",
               "RelativeDocumentMoniker": "BreadGPT\\Views\\MainWindow.xaml",

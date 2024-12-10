@@ -13,7 +13,7 @@ namespace BreadGPT.Services
             _contextFactory = contextFactory;
         }
 
-        public async Task<IEnumerable<Message>> GetAllAsync(Chat chat)
+        public async Task<IEnumerable<Message>> GetAll(Chat chat)
         {
             using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
             {
@@ -21,7 +21,7 @@ namespace BreadGPT.Services
             }
         }
 
-        public async Task<Message> SendAsync(Message message)
+        public async Task<Message> Send(Message message)
         {
             using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
             {

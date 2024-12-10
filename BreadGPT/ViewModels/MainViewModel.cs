@@ -9,13 +9,13 @@ using System.Windows.Input;
 
 namespace BreadGPT.ViewModels
 {
-    class MainViewModel : BaseViewModel
+    public class MainViewModel : BaseViewModel
     {
-        private IChatService _chatService = new ChatService(new BreadgptDbContextFactory());
-        private IMessageService _messageService = new MessageService(new BreadgptDbContextFactory());
-        private MistralClient _mistralClient = new MistralClient("r15uvSJsdSTGKygysJWuJqKRZjQGAKEm");
+        private readonly IChatService _chatService;
+        private readonly IMessageService _messageService;
+        private readonly MistralClient _mistralClient;
 
-        public ObservableCollection<Chat> Chats { get; set; } = new ObservableCollection<Chat>();
+        public ObservableCollection<Chat> Chats { get; } = new ObservableCollection<Chat>();
 
         private bool _sendButtonEnabled = true;
         public bool SendButtonEnabled
@@ -52,6 +52,10 @@ namespace BreadGPT.ViewModels
 
         public MainViewModel()
         {
+            _chatService = new ChatService(new BreadgptDbContextFactory());
+            _messageService = new MessageService(new BreadgptDbContextFactory());
+            _mistralClient = new MistralClient("r15uvSJsdSTGKygysJWuJqKRZjQGAKEm");
+
             CreateChatCommand = new RelayCommand(CreateChat);
             RenameChatCommand = new RelayCommand(RenameChat);
             DeleteChatCommand = new RelayCommand(DeleteChat);
@@ -62,112 +66,125 @@ namespace BreadGPT.ViewModels
 
         private void CreateChat()
         {
-            if (Chats.Count > 0 && SelectedChat.Messages.Count == 0) return;
-            if (Chats.Count == 10) { MessageBox.Show("You have increased the maximum number of chats"); return; }
+            if (Chats.Any() && SelectedChat.Messages.Count == 0) return;
+            if (Chats.Count >= 10)
+            {
+                MessageBox.Show("You have reached the maximum number of chats.");
+                return;
+            }
 
-            _chatService.Create(
-                SelectedChat = new Chat
-                {
-                    Id = Guid.NewGuid(),
-                    Title = $"New Chat {Chats.Count + 1}",
-                    LastMessageAt = DateTime.UtcNow
-                });            
+            var newChat = new Chat
+            {
+                Id = Guid.NewGuid(),
+                Title = $"New Chat {Chats.Count + 1}",
+                LastMessageAt = DateTime.UtcNow
+            };
 
-            Chats.Add(SelectedChat);
+            _chatService.Create(newChat);
+            Chats.Add(newChat);
             SortChats();
+            SelectedChat = newChat;
         }
 
         private async void LoadChats()
         {
-            IEnumerable<Chat> chats = await _chatService.GetAll();
+            var chats = await _chatService.GetAll();
 
-            if (chats.Count() == 0) { CreateChat(); return; };
+            if (!chats.Any())
+            {
+                CreateChat();
+                return;
+            }
 
             foreach (var chat in chats)
             {
                 Chats.Add(chat);
-                LoadMessages(chat);
+                await LoadMessages(chat);
             }
 
             SortChats();
         }
 
-        private void SortChats()
+        private async Task LoadMessages(Chat chat)
         {
-            var sorted = Chats.OrderByDescending(chat => chat.LastMessageAt).ToList();
-            Chats.Clear();
-
-            foreach (var chat in sorted)
-            {
-                Chats.Add(chat);
-            }
-
-            SelectedChat = Chats[0];
-        }
-
-        private void RenameChat()
-        {
-
-        }
-
-        private void DeleteChat()
-        {
-
-        }
-
-        private async void LoadMessages(Chat chat)
-        {
-            IEnumerable<Message> messages = await _messageService.GetAllAsync(chat);
-
-            if (messages.Count() == 0) return;
+            var messages = await _messageService.GetAll(chat);
 
             foreach (var message in messages)
             {
                 chat.Messages.Add(message);
             }
+
+            SortMessages(chat);
+        }
+
+        private void SortChats()
+        {
+            var sortedChats = Chats.OrderByDescending(chat => chat.LastMessageAt).ToList();
+            Chats.Clear();
+            foreach (var chat in sortedChats)
+            {
+                Chats.Add(chat);
+            }
+            SelectedChat = Chats.FirstOrDefault();
+        }
+
+        private void SortMessages(Chat chat)
+        {
+            chat.Messages = new ObservableCollection<Message>(chat.Messages.OrderBy(message => message.SentAt));
+        }
+
+        private void RenameChat()
+        {
+            // TODO: Implement RenameChat functionality.
+        }
+
+        private void DeleteChat()
+        {
+            // TODO: Implement DeleteChat functionality.
         }
 
         private async void SendMessage()
         {
-            if(string.IsNullOrWhiteSpace(TextMessage) || SelectedChat.Messages.Count == 10) return;
+            if (string.IsNullOrWhiteSpace(TextMessage) || SelectedChat.Messages.Count >= 25) return;
 
-            var message = TextMessage;
+            var messageText = TextMessage;
             TextMessage = string.Empty;
 
-            Message = new Message
+            var newMessage = new Message
             {
                 Id = Guid.NewGuid(),
-                Text = message,
+                Text = messageText,
                 IsSendByUser = true,
-                ChatId = SelectedChat.Id,
+                SentAt = DateTime.UtcNow,
+                ChatId = SelectedChat.Id
             };
 
-            await _messageService.SendAsync(Message);
+            await _messageService.Send(newMessage);
 
-            SelectedChat.Messages.Add(Message);
+            SelectedChat.Messages.Add(newMessage);
             SelectedChat.LastMessageAt = DateTime.UtcNow;
-
             SortChats();
 
             SendButtonEnabled = false;
-
-            await GetResponse(message);
-
+            await GetResponse(SelectedChat, messageText);
             SendButtonEnabled = true;
         }
 
-        private async Task GetResponse(string message)
+        private async Task GetResponse(Chat chat, string userMessage)
         {
-            SelectedChat.Messages.Add(
-                Message = new Message
-                {
-                    Id = Guid.NewGuid(),
-                    Text = await PostRequest(message),
-                    IsSendByUser = false,
-                    ChatId = SelectedChat.Id,
-                });
+            var responseText = await PostRequest(userMessage);
 
-            await _messageService.SendAsync(Message);
+            var responseMessage = new Message
+            {
+                Id = Guid.NewGuid(),
+                Text = responseText,
+                IsSendByUser = false,
+                SentAt = DateTime.UtcNow,
+                ChatId = chat.Id
+            };
+
+            chat.Messages.Add(responseMessage);
+            await _messageService.Send(responseMessage);
         }
 
         private async Task<string> PostRequest(string message)
@@ -175,18 +192,18 @@ namespace BreadGPT.ViewModels
             try
             {
                 var answer = await _mistralClient.CompleteAsync(
-                        new()
-                        {
-                            Model = "mistral-large-latest",
-                            Messages = [new() { Role = "user", Content = message }]
-                        });
+                    new()
+                    {
+                        Model = "mistral-large-latest",
+                        Messages = [new() { Role = "user", Content = message }]
+                    });
 
                 return answer;
             }
             catch
             {
                 await Task.Delay(700);
-                return "Something wrong :(";
+                return "Something went wrong :(";
             }
         }
     }

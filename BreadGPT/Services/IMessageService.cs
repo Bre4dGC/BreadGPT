@@ -4,7 +4,7 @@ namespace BreadGPT.Services
 {
     internal interface IMessageService
     {
-        Task<IEnumerable<Message>> GetAllAsync(Chat chat);
-        Task<Message> SendAsync(Message message);
+        Task<IEnumerable<Message>> GetAll(Chat chat);
+        Task<Message> Send(Message message);
     }
 }

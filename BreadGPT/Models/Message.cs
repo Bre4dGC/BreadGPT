@@ -4,7 +4,8 @@
     {
         public Guid ChatId { get; set; }
         public string Text { get; set; } = string.Empty;
-        public bool IsSendByUser { get; set; }
+        public bool IsSendByUser { get; set; } = true;
+        public DateTime SentAt { get; set; }
         public virtual Chat Chat { get; set; }
     }
 }
