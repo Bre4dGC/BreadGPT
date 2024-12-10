@@ -31,5 +31,14 @@ namespace BreadGPT.Compoments
 
         public static readonly DependencyProperty CommandProperty =
             DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(MessageInput), new PropertyMetadata(null));
+
+        public bool Enabled
+        {
+            get => (bool)GetValue(EnabledProperty);
+            set => SetValue(EnabledProperty, value);
+        }
+
+        public static readonly DependencyProperty EnabledProperty =
+            DependencyProperty.Register(nameof(Enabled), typeof(bool), typeof(MessageInput));
     }
 }

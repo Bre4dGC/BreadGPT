@@ -88,7 +88,10 @@
                 Text="{Binding Text, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 TextWrapping="Wrap" />
 
-            <Button Grid.Column="1" Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}">
+            <Button
+                Grid.Column="1"
+                Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                IsEnabled="{Binding Enabled, RelativeSource={RelativeSource AncestorType=UserControl}}">
                 <Image
                     Width="22"
                     Height="22"
