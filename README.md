@@ -1,4 +1,11 @@
-# BreadGPT
+<h1 align="center">BreadGPT</h1>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Language-C%23-239120?style=flat&logo=c-sharp&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Framework-WPF-0078D7?style=flat&logo=microsoft&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Database-SQLite-003B57?style=flat&logo=sqlite&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Model-Mistral_AI-1E88E5?style=flat&logo=ai&logoColor=white"/>
+</p>
 
 BreadGPT — это клон ChatGPT, разработанный на основе **C#**, **WPF**, с использованием **SQLite** и **CommunityToolkit.MVVM**. Проект взаимодействует с нейросетью **Mistral AI** для обработки запросов пользователей.  
 
@@ -9,14 +16,6 @@ BreadGPT — это клон ChatGPT, разработанный на основ
 - **Сохранение истории**: Все данные чатов и запросов сохраняются в локальной базе данных SQLite.
 - **Планируемые функции**: 
   - Добавление памяти и контекста для улучшения взаимодействия с нейросетью.
-
-## Используемые технологии
-
-- **C#**
-- **WPF** (Windows Presentation Foundation)
-- **SQLite** для хранения данных
-- **CommunityToolkit.MVVM** для реализации шаблона MVVM
-- **Mistral AI API** для взаимодействия с нейросетью
 
 ## Структура проекта
 
