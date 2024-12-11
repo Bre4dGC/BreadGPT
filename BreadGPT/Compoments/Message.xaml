@@ -17,16 +17,19 @@
             <Setter Property="CornerRadius" Value="13" />
         </Style>
 
-        <Style TargetType="TextBlock">
+        <Style TargetType="TextBox">
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Background" Value="Transparent" />
             <Setter Property="Margin" Value="15,10" />
             <Setter Property="FontSize" Value="14" />
-            <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="Foreground" Value="{StaticResource Foreground}" />
         </Style>
     </UserControl.Resources>
 
     <Border Background="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}">
-        <TextBlock Text="{Binding MessageContent, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+        <TextBox Text="{Binding MessageContent, RelativeSource={RelativeSource AncestorType=UserControl}}" />
     </Border>
 
 </UserControl>
