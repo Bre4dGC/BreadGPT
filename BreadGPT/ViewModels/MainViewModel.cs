@@ -177,7 +177,15 @@ namespace BreadGPT.ViewModels
 
         private void DeleteChat()
         {
-            // TODO: Implement DeleteChat functionality.
+            try
+            {
+                Chats.Remove(SelectedChat);
+                _chatService.Delete(SelectedChat.Id);
+        }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
 
         private async void SendMessage()
