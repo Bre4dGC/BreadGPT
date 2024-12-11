@@ -64,6 +64,9 @@ namespace BreadGPT.ViewModels
             LoadChats();
         }
 
+        /// <summary>
+        /// Создать чат
+        /// </summary>
         private void CreateChat()
         {
             if (Chats.Any() && SelectedChat.Messages.Count == 0) return;
@@ -93,6 +96,9 @@ namespace BreadGPT.ViewModels
             }
         }
 
+        /// <summary>
+        /// Загрузить чаты из базы данных
+        /// </summary>
         private async void LoadChats()
         {
             var chats = await _chatService.GetAll();
@@ -119,6 +125,11 @@ namespace BreadGPT.ViewModels
             }
         }
 
+        /// <summary>
+        /// Загрузить сообщения из базы данных
+        /// </summary>
+        /// <param name="chat">Чат для загрузки сообщений</param>
+        /// <returns></returns>
         private async Task LoadMessages(Chat chat)
         {
             try
@@ -138,6 +149,9 @@ namespace BreadGPT.ViewModels
             }
         }
 
+        /// <summary>
+        /// Сортировка чатов по последнему сообщению
+        /// </summary>
         private void SortChats()
         {
             try
@@ -158,6 +172,10 @@ namespace BreadGPT.ViewModels
             }
         }
 
+        /// <summary>
+        /// Отсортировать сообщения по дате отправки
+        /// </summary>
+        /// <param name="chat">Чат для сортировки сообщений</param>
         private void SortMessages(Chat chat)
         {
             try
@@ -170,24 +188,33 @@ namespace BreadGPT.ViewModels
             }
         }
 
+        /// <summary>
+        /// Переименовать чат
+        /// </summary>
         private void RenameChat()
         {
-            // TODO: Implement RenameChat functionality.
+            // TODO: Implement Chat rename functionality.
         }
 
+        /// <summary>
+        /// Удалить чат
+        /// </summary>
         private void DeleteChat()
         {
             try
             {
                 Chats.Remove(SelectedChat);
                 _chatService.Delete(SelectedChat.Id);
-        }
+            }
             catch(Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}");
             }
         }
 
+        /// <summary>
+        /// Отправить сообщение от пользователя
+        /// </summary>
         private async void SendMessage()
         {
             if (string.IsNullOrWhiteSpace(TextMessage) || SelectedChat.Messages.Count >= 25) return;
@@ -214,7 +241,7 @@ namespace BreadGPT.ViewModels
 
                 SortChats();
 
-                await GetResponse(SelectedChat, messageText);
+                await GetAiResponse(SelectedChat, messageText);
             }
             catch (Exception ex)
             {
@@ -222,7 +249,12 @@ namespace BreadGPT.ViewModels
             }
         }
 
-        private async Task GetResponse(Chat chat, string userMessage)
+        /// <summary>
+        /// Создать сообщение нейросети
+        /// </summary>
+        /// <param name="chat">Чат для ответа нейросети</param>
+        /// <param name="userMessage">Сообщение от пользователя</param>
+        private async Task GetAiResponse(Chat chat, string userMessage)
         {
             SendButtonEnabled = false;
 
@@ -250,7 +282,12 @@ namespace BreadGPT.ViewModels
             SendButtonEnabled = true;
         }
 
-        private async Task<string> PostRequest(string message)
+        /// <summary>
+        /// Запрос к нейросети
+        /// </summary>
+        /// <param name="userMessage">Сообщение от пользователя</param>
+        /// <returns>Ответ от нейросети</returns>
+        private async Task<string> PostRequest(string userMessage)
         {
             try
             {
@@ -258,7 +295,7 @@ namespace BreadGPT.ViewModels
                     new()
                     {
                         Model = "mistral-large-latest",
-                        Messages = [new() { Role = "user", Content = message }]
+                        Messages = [new() { Role = "user", Content = userMessage }]
                     });
 
                 return answer;
