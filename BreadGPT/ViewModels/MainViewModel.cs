@@ -73,17 +73,24 @@ namespace BreadGPT.ViewModels
                 return;
             }
 
-            var newChat = new Chat
+            try
             {
-                Id = Guid.NewGuid(),
-                Title = $"New Chat {Chats.Count + 1}",
-                LastMessageAt = DateTime.UtcNow
-            };
+                var newChat = new Chat
+                {
+                    Id = Guid.NewGuid(),
+                    Title = $"New Chat {Chats.Count + 1}",
+                    LastMessageAt = DateTime.UtcNow
+                };
 
-            _chatService.Create(newChat);
-            Chats.Add(newChat);
-            SortChats();
-            SelectedChat = newChat;
+                _chatService.Create(newChat);
+                Chats.Add(newChat);
+                SortChats();
+                SelectedChat = newChat;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
 
         private async void LoadChats()
@@ -96,41 +103,71 @@ namespace BreadGPT.ViewModels
                 return;
             }
 
-            foreach (var chat in chats)
+            try
             {
-                Chats.Add(chat);
-                await LoadMessages(chat);
-            }
+                foreach (var chat in chats)
+                {
+                    Chats.Add(chat);
+                    await LoadMessages(chat);
+                }
 
-            SortChats();
+                SortChats();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
 
         private async Task LoadMessages(Chat chat)
         {
-            var messages = await _messageService.GetAll(chat);
-
-            foreach (var message in messages)
+            try
             {
-                chat.Messages.Add(message);
-            }
+                var messages = await _messageService.GetAll(chat);
 
-            SortMessages(chat);
+                foreach (var message in messages)
+                {
+                    chat.Messages.Add(message);
+                }
+
+                SortMessages(chat);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
 
         private void SortChats()
         {
-            var sortedChats = Chats.OrderByDescending(chat => chat.LastMessageAt).ToList();
-            Chats.Clear();
-            foreach (var chat in sortedChats)
+            try
             {
-                Chats.Add(chat);
+                var sortedChats = Chats.OrderByDescending(chat => chat.LastMessageAt).ToList();
+                Chats.Clear();
+
+                foreach (var chat in sortedChats)
+                {
+                    Chats.Add(chat);
+                }
+
+                SelectedChat = Chats.FirstOrDefault();
             }
-            SelectedChat = Chats.FirstOrDefault();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
 
         private void SortMessages(Chat chat)
         {
-            chat.Messages = new ObservableCollection<Message>(chat.Messages.OrderBy(message => message.SentAt));
+            try
+            {
+                chat.Messages = new ObservableCollection<Message>(chat.Messages.OrderBy(message => message.SentAt));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
 
         private void RenameChat()
@@ -150,41 +187,59 @@ namespace BreadGPT.ViewModels
             var messageText = TextMessage;
             TextMessage = string.Empty;
 
-            var newMessage = new Message
+            try
             {
-                Id = Guid.NewGuid(),
-                Text = messageText,
-                IsSendByUser = true,
-                SentAt = DateTime.UtcNow,
-                ChatId = SelectedChat.Id
-            };
+                var newMessage = new Message
+                {
+                    Id = Guid.NewGuid(),
+                    Text = messageText,
+                    IsSendByUser = true,
+                    SentAt = DateTime.UtcNow,
+                    ChatId = SelectedChat.Id
+                };
 
-            await _messageService.Send(newMessage);
+                SelectedChat.Messages.Add(newMessage);
+                SelectedChat.LastMessageAt = DateTime.UtcNow;
 
-            SelectedChat.Messages.Add(newMessage);
-            SelectedChat.LastMessageAt = DateTime.UtcNow;
-            SortChats();
+                await _messageService.Send(newMessage);
+                await _chatService.Update(SelectedChat.Id, SelectedChat);
 
-            SendButtonEnabled = false;
-            await GetResponse(SelectedChat, messageText);
-            SendButtonEnabled = true;
+                SortChats();
+
+                await GetResponse(SelectedChat, messageText);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
 
         private async Task GetResponse(Chat chat, string userMessage)
         {
-            var responseText = await PostRequest(userMessage);
+            SendButtonEnabled = false;
 
-            var responseMessage = new Message
+            try
             {
-                Id = Guid.NewGuid(),
-                Text = responseText,
-                IsSendByUser = false,
-                SentAt = DateTime.UtcNow,
-                ChatId = chat.Id
-            };
+                var responseText = await PostRequest(userMessage);
 
-            chat.Messages.Add(responseMessage);
-            await _messageService.Send(responseMessage);
+                var responseMessage = new Message
+                {
+                    Id = Guid.NewGuid(),
+                    Text = responseText,
+                    IsSendByUser = false,
+                    SentAt = DateTime.UtcNow,
+                    ChatId = chat.Id
+                };
+
+                chat.Messages.Add(responseMessage);
+                await _messageService.Send(responseMessage);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+
+            SendButtonEnabled = true;
         }
 
         private async Task<string> PostRequest(string message)
@@ -203,7 +258,7 @@ namespace BreadGPT.ViewModels
             catch
             {
                 await Task.Delay(700);
-                return "Something went wrong :(";
+                return "Error, something went wrong :(";
             }
         }
     }
