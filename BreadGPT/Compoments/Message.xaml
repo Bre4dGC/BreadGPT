@@ -13,7 +13,7 @@
     <UserControl.Resources>
         <Style TargetType="Border">
             <Setter Property="MaxWidth" Value="650" />
-            <Setter Property="Margin" Value="20,8" />
+            <Setter Property="Margin" Value="0,10" />
             <Setter Property="CornerRadius" Value="13" />
         </Style>
 
