@@ -44,8 +44,10 @@
 
         </Style>
 
-        <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="12" />
+        <Style TargetType="TextBox">
+            <Setter Property="IsEnabled" Value="False" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
             <Setter Property="Foreground" Value="{StaticResource Foreground}" />
         </Style>
 
@@ -88,7 +90,7 @@
                 <ColumnDefinition Width="30" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock
+            <TextBox
                 Grid.Column="0"
                 Margin="5,0"
                 VerticalAlignment="Center"
