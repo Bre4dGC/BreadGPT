@@ -28,7 +28,7 @@ namespace BreadGPT.ViewModels
         public Chat SelectedChat
         {
             get { return _selectedChat; }
-            set { _selectedChat = value; OnPropertyChanged(nameof(SelectedChat)); }
+            set { _selectedChat = value; OnPropertyChanged(); }
         }
 
         private Message _message;
@@ -52,8 +52,8 @@ namespace BreadGPT.ViewModels
 
         public MainViewModel()
         {
-            _chatService = new ChatService(new BreadgptDbContextFactory());
-            _messageService = new MessageService(new BreadgptDbContextFactory());
+            _chatService = new ChatService(new ApplicationDbContextFactory());
+            _messageService = new MessageService(new ApplicationDbContextFactory());
             _mistralClient = new MistralClient("r15uvSJsdSTGKygysJWuJqKRZjQGAKEm");
 
             CreateChatCommand = new RelayCommand(CreateChat);

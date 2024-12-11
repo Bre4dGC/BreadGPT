@@ -6,16 +6,16 @@ namespace BreadGPT.Services
 {
     internal class MessageService : IMessageService
     {
-        private readonly BreadgptDbContextFactory _contextFactory;
+        private readonly ApplicationDbContextFactory _contextFactory;
 
-        public MessageService(BreadgptDbContextFactory contextFactory)
+        public MessageService(ApplicationDbContextFactory contextFactory)
         {
             _contextFactory = contextFactory;
         }
 
         public async Task<IEnumerable<Message>> GetAll(Chat chat)
         {
-            using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
+            using (ApplicationDbContext context = _contextFactory.CreateDbContext())
             {
                 return await context.Set<Message>().Where(m => m.ChatId == chat.Id).ToListAsync();
             }
@@ -23,7 +23,7 @@ namespace BreadGPT.Services
 
         public async Task<Message> Send(Message message)
         {
-            using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
+            using (ApplicationDbContext context = _contextFactory.CreateDbContext())
             {
                 var createdMessage = await context.Set<Message>().AddAsync(message);
                 await context.SaveChangesAsync();

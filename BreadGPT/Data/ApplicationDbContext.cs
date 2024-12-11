@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BreadGPT.Data
 {
-    class BreadGPTDbContext : DbContext
+    class ApplicationDbContext : DbContext
     {
         public DbSet<Chat> Chats { get; set; }
 
-        public BreadGPTDbContext(DbContextOptions options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

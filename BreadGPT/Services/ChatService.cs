@@ -7,16 +7,16 @@ namespace BreadGPT.Services
 {
     internal class ChatService : IChatService
     {
-        private readonly BreadgptDbContextFactory _contextFactory;
+        private readonly ApplicationDbContextFactory _contextFactory;
 
-        public ChatService(BreadgptDbContextFactory contextFactory)
+        public ChatService(ApplicationDbContextFactory contextFactory)
         {
             _contextFactory = contextFactory;
         }
 
         public async Task<Chat> Create(Chat chat)
         {
-            using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
+            using (ApplicationDbContext context = _contextFactory.CreateDbContext())
             {
                 EntityEntry<Chat> CreatedChat = await context.Set<Chat>().AddAsync(chat);
                 await context.SaveChangesAsync();
@@ -27,7 +27,7 @@ namespace BreadGPT.Services
 
         public async Task<bool> Delete(Guid id)
         {
-            using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
+            using (ApplicationDbContext context = _contextFactory.CreateDbContext())
             {
                 Chat chat = await context.Set<Chat>().FirstOrDefaultAsync((e) => e.Id == id);
                 context.Set<Chat>().Remove(chat);
@@ -39,7 +39,7 @@ namespace BreadGPT.Services
 
         public async Task<IEnumerable<Chat>> GetAll()
         {
-            using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
+            using (ApplicationDbContext context = _contextFactory.CreateDbContext())
             {
                 IEnumerable<Chat> chats = await context.Set<Chat>().ToListAsync();
                 return chats;
@@ -48,7 +48,7 @@ namespace BreadGPT.Services
 
         public async Task<Chat> Get(Guid id)
         {
-            using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
+            using (ApplicationDbContext context = _contextFactory.CreateDbContext())
             {
                 Chat chat = await context.Set<Chat>().FirstOrDefaultAsync((e) => e.Id == id);
                 return chat;
@@ -57,7 +57,7 @@ namespace BreadGPT.Services
 
         public async Task<Chat> Update(Guid id, Chat chat)
         {
-            using (BreadGPTDbContext context = _contextFactory.CreateDbContext())
+            using (ApplicationDbContext context = _contextFactory.CreateDbContext())
             {
                 chat.Id = id;
                 context.Set<Chat>().Update(chat);
