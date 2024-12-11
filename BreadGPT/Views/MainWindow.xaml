@@ -121,7 +121,10 @@
                     Foreground="{StaticResource Foreground}"
                     Text="{Binding Title}" />
 
-                <Grid Grid.Column="1" Visibility="Collapsed">
+                <Grid
+                    x:Name="ActionGrid"
+                    Grid.Column="1"
+                    Visibility="Collapsed">
 
                     <ToggleButton Style="{StaticResource Button}">
                         <Image
@@ -139,6 +142,16 @@
 
                         <comp:ChatActionPopup />
                     </Popup>
+
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
                 </Grid>
             </Grid>
         </DataTemplate>
@@ -159,7 +172,11 @@
         </DataTemplate>
     </Window.Resources>
 
-    <Border Background="{StaticResource WindowBackground}" CornerRadius="7">
+    <Border
+        Background="{StaticResource WindowBackground}"
+        BorderBrush="{StaticResource ControlBackground}"
+        BorderThickness="1.5"
+        CornerRadius="7">
         <Grid>
             <Border x:Name="Sidebar" Style="{StaticResource SidebarStyle}">
                 <Grid>
@@ -237,10 +254,15 @@
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
 
-                        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
-                            <StackPanel>
-                                <ItemsControl ItemTemplate="{DynamicResource MessagesTemplate}" ItemsSource="{Binding SelectedChat.Messages}" />
-                            </StackPanel>
+                        <ScrollViewer
+                            x:Name="MessageScrollViewer"
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Auto">
+                            <ItemsControl
+                                x:Name="MessageItemsControl"
+                                Padding="30,0"
+                                ItemTemplate="{DynamicResource MessagesTemplate}"
+                                ItemsSource="{Binding SelectedChat.Messages}" />
                         </ScrollViewer>
 
                         <Border
@@ -252,8 +274,8 @@
                             <comp:MessageInput
                                 x:Name="Input"
                                 Grid.Row="1"
-                                Enabled="{Binding SendButtonEnabled}"
                                 Command="{Binding SendMessageCommand}"
+                                Enabled="{Binding SendButtonEnabled}"
                                 Text="{Binding TextMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Border>
                     </Grid>

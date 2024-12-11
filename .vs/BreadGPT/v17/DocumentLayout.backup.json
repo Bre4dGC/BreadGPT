@@ -3,28 +3,16 @@
   "WorkspaceRootPath": "P:\\C# proj\\WPF\\BreadGPT\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|p:\\c# proj\\wpf\\breadgpt\\breadgpt\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|solutionrelative:breadgpt\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|p:\\c# proj\\wpf\\breadgpt\\breadgpt\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|solutionrelative:breadgpt\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|p:\\c# proj\\wpf\\breadgpt\\breadgpt\\models\\chat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|solutionrelative:breadgpt\\models\\chat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|p:\\c# proj\\wpf\\breadgpt\\breadgpt\\services\\messageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|solutionrelative:breadgpt\\services\\messageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|p:\\c# proj\\wpf\\breadgpt\\breadgpt\\views\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|solutionrelative:breadgpt\\views\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|p:\\c# proj\\wpf\\breadgpt\\breadgpt\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|solutionrelative:breadgpt\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|p:\\c# proj\\wpf\\breadgpt\\breadgpt\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|solutionrelative:breadgpt\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|p:\\c# proj\\wpf\\breadgpt\\breadgpt\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B18721E8-BA36-40E8-A0FE-5919CE75AF87}|BreadGPT\\BreadGPT.csproj|solutionrelative:breadgpt\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,46 +22,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "MainViewModel.cs",
               "DocumentMoniker": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\ViewModels\\MainViewModel.cs",
               "RelativeDocumentMoniker": "BreadGPT\\ViewModels\\MainViewModel.cs",
-              "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\ViewModels\\MainViewModel.cs*",
-              "RelativeToolTip": "BreadGPT\\ViewModels\\MainViewModel.cs*",
-              "ViewState": "AgIAAJEAAAAAAAAAAAAQwKYAAAAAAAAAAAAAAA==",
+              "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "BreadGPT\\ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAAHUAAAAAAAAAAAAiwLUAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T20:06:14.49Z",
               "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Chat.cs",
-              "DocumentMoniker": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Models\\Chat.cs",
-              "RelativeDocumentMoniker": "BreadGPT\\Models\\Chat.cs",
-              "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Models\\Chat.cs",
-              "RelativeToolTip": "BreadGPT\\Models\\Chat.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T08:10:33.404Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ChatService.cs",
-              "DocumentMoniker": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Services\\ChatService.cs",
-              "RelativeDocumentMoniker": "BreadGPT\\Services\\ChatService.cs",
-              "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Services\\ChatService.cs",
-              "RelativeToolTip": "BreadGPT\\Services\\ChatService.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAowAcAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T08:09:41.058Z",
               "EditorCaption": ""
             },
             {
@@ -86,38 +48,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MessageService.cs",
-              "DocumentMoniker": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Services\\MessageService.cs",
-              "RelativeDocumentMoniker": "BreadGPT\\Services\\MessageService.cs",
-              "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Services\\MessageService.cs",
-              "RelativeToolTip": "BreadGPT\\Services\\MessageService.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAYAAAAzAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Views\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "BreadGPT\\Views\\MainWindow.xaml.cs",
+              "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Views\\MainWindow.xaml.cs*",
+              "RelativeToolTip": "BreadGPT\\Views\\MainWindow.xaml.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T21:52:06.017Z"
+              "WhenOpened": "2024-12-11T09:23:23.99Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Message.cs",
-              "DocumentMoniker": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Models\\Message.cs",
-              "RelativeDocumentMoniker": "BreadGPT\\Models\\Message.cs",
-              "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Models\\Message.cs",
-              "RelativeToolTip": "BreadGPT\\Models\\Message.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-10T18:00:27.864Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Views\\MainWindow.xaml",
               "RelativeDocumentMoniker": "BreadGPT\\Views\\MainWindow.xaml",
               "ToolTip": "P:\\C# proj\\WPF\\BreadGPT\\BreadGPT\\Views\\MainWindow.xaml",
               "RelativeToolTip": "BreadGPT\\Views\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-05T07:16:46.112Z"
+              "WhenOpened": "2024-12-05T07:16:46.112Z",
+              "EditorCaption": ""
             }
           ]
         }
