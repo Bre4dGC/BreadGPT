@@ -5,7 +5,6 @@
     xmlns:comp="clr-namespace:BreadGPT.Compoments"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:style="clr-namespace:BreadGPT.Utilities"
     xmlns:vm="clr-namespace:BreadGPT.ViewModels"
     x:Name="Window"
     Title="MainWindow"
@@ -20,12 +19,11 @@
     mc:Ignorable="d">
 
     <Window.DataContext>
-        <vm:MainViewModel />
+        <vm:MainViewModel/>
     </Window.DataContext>
 
     <Window.Resources>
-        <style:EqualityConverter x:Key="EqualityConverter" />
-
+        <!--  Стили border для Sidebar  -->
         <Style x:Key="SidebarStyle" TargetType="Border">
             <Setter Property="Width" Value="250" />
             <Setter Property="Background" Value="{StaticResource ControlBackground}" />
@@ -33,6 +31,7 @@
             <Setter Property="CornerRadius" Value="7 0 0 7" />
         </Style>
 
+        <!--  Стили border для Content  -->
         <Style x:Key="ContentStyle" TargetType="Border">
             <Setter Property="Width" Value="1100" />
             <Setter Property="Background" Value="{StaticResource WindowBackground}" />
@@ -41,6 +40,7 @@
             <Setter Property="Panel.ZIndex" Value="1" />
         </Style>
 
+        <!--  Стили TextBlock для логотипа  -->
         <Style x:Key="Logo" TargetType="TextBlock">
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontWeight" Value="Medium" />
@@ -49,6 +49,7 @@
             <Setter Property="Foreground" Value="{StaticResource Foreground}" />
         </Style>
 
+        <!--  Стили ListBoxItem для кнопки чата  -->
         <Style TargetType="ListBoxItem">
             <Setter Property="Height" Value="40" />
             <Setter Property="Cursor" Value="Hand" />
@@ -79,11 +80,7 @@
             </Style.Triggers>
         </Style>
 
-        <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="12" />
-            <Setter Property="Foreground" Value="{StaticResource Foreground}" />
-        </Style>
-
+        <!--  Стили для кнопки открытия Popup  -->
         <Style x:Key="Button" TargetType="ToggleButton">
             <Setter Property="Opacity" Value="0.6" />
             <Setter Property="Height" Value="40" />
@@ -107,6 +104,7 @@
             </Style.Triggers>
         </Style>
 
+        <!--  DataTemplate для кнопки чата  -->
         <DataTemplate x:Key="ChatTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -121,10 +119,7 @@
                     Foreground="{StaticResource Foreground}"
                     Text="{Binding Title}" />
 
-                <Grid
-                    x:Name="ActionGrid"
-                    Grid.Column="1"
-                    Visibility="Collapsed">
+                <Grid x:Name="ActionGrid" Grid.Column="1">
 
                     <ToggleButton Style="{StaticResource Button}">
                         <Image
@@ -134,17 +129,19 @@
                     </ToggleButton>
 
                     <Popup
-                        Name="MyMenuPopup"
+                        Name="ActionPopup"
                         AllowsTransparency="True"
                         Placement="Right"
                         PopupAnimation="Fade"
                         StaysOpen="False">
 
                         <comp:ChatActionPopup />
+                        
                     </Popup>
 
                     <Grid.Style>
                         <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Collapsed" />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
                                     <Setter Property="Visibility" Value="Visible" />
@@ -156,6 +153,7 @@
             </Grid>
         </DataTemplate>
 
+        <!--  DataTemplate для сообщения  -->
         <DataTemplate x:Key="MessagesTemplate">
             <comp:Message x:Name="Message" MessageContent="{Binding Text}" />
 
@@ -172,12 +170,14 @@
         </DataTemplate>
     </Window.Resources>
 
+    <!--  Окно  -->
     <Border
         Background="{StaticResource WindowBackground}"
         BorderBrush="{StaticResource ControlBackground}"
         BorderThickness="1.5"
         CornerRadius="7">
         <Grid>
+            <!--  Sidebar  -->
             <Border x:Name="Sidebar" Style="{StaticResource SidebarStyle}">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -185,11 +185,13 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
+                    <!-- Логотип -->
                     <TextBlock
                         Grid.Row="0"
                         Style="{StaticResource Logo}"
                         Text="BreadGPT" />
 
+                    <!-- Чаты -->
                     <Border Grid.Row="1" Margin="10">
                         <ListBox
                             Background="Transparent"
@@ -201,6 +203,7 @@
                 </Grid>
             </Border>
 
+            <!--  Content  -->
             <Border x:Name="Content" Style="{StaticResource ContentStyle}">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -208,6 +211,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
+                    <!--  UpBar  -->
                     <Grid Margin="5,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
@@ -215,7 +219,10 @@
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
+                        <!--  Кнопки Action  -->
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
+
+                            <!--  Свернуть/Развернуть Sidebar  -->
                             <comp:TabButton
                                 Width="45"
                                 Height="55"
@@ -223,6 +230,8 @@
                                 ButtonClicked="Button_Click"
                                 Icon="/Assets/menu.png"
                                 IconSize="25" />
+
+                            <!--  Создать новый чат  -->
                             <comp:TabButton
                                 Width="45"
                                 Height="55"
@@ -232,13 +241,18 @@
                                 IconSize="20" />
                         </StackPanel>
 
+                        <!--  Кнопки Action  -->
                         <StackPanel Grid.Column="2" Orientation="Horizontal">
+
+                            <!--  Свернуть окно  -->
                             <comp:TabButton
                                 Width="40"
                                 Height="50"
                                 ButtonClicked="TabButton_ButtonClicked_1"
                                 Icon="/Assets/collapse.png"
                                 IconSize="12" />
+
+                            <!--  Закрыть окно  -->
                             <comp:TabButton
                                 Width="40"
                                 Height="50"
@@ -248,36 +262,35 @@
                         </StackPanel>
                     </Grid>
 
+                    <!--  Content  -->
                     <Grid Grid.Row="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*" />
-                            <RowDefinition Height="auto" />
-                        </Grid.RowDefinitions>
 
+                        <!--  Сообщения  -->
                         <ScrollViewer
                             x:Name="MessageScrollViewer"
                             HorizontalScrollBarVisibility="Hidden"
                             VerticalScrollBarVisibility="Auto">
-                            <ItemsControl
-                                x:Name="MessageItemsControl"
-                                Padding="30,0"
-                                ItemTemplate="{DynamicResource MessagesTemplate}"
-                                ItemsSource="{Binding SelectedChat.Messages}" />
+                            <StackPanel>
+                                <ItemsControl
+                                    x:Name="MessageItemsControl"
+                                    Padding="50,0"
+                                    ItemTemplate="{DynamicResource MessagesTemplate}"
+                                    ItemsSource="{Binding SelectedChat.Messages}" />
+
+                                <Border Height="70" />
+                            </StackPanel>
                         </ScrollViewer>
 
-                        <Border
+                        <!-- Ввод сообщения -->
+                        <comp:MessageInput
+                            x:Name="Input"
                             Grid.Row="1"
-                            Margin="0,0,0,15"
+                            Margin="0,15"
+                            IsEnabled="{Binding SendButtonEnabled}"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Bottom"
-                            Background="Transparent">
-                            <comp:MessageInput
-                                x:Name="Input"
-                                Grid.Row="1"
-                                Command="{Binding SendMessageCommand}"
-                                Enabled="{Binding SendButtonEnabled}"
-                                Text="{Binding TextMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        </Border>
+                            Command="{Binding SendMessageCommand}"
+                            Text="{Binding TextMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </Grid>
             </Border>

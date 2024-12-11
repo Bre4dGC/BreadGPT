@@ -86,7 +86,7 @@ namespace BreadGPT.View
         /// </summary>
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 Input.Command.Execute(null);
             }
@@ -97,7 +97,7 @@ namespace BreadGPT.View
         /// </summary>
         private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            MessageScrollViewer.ScrollToEnd();
+            MessageScrollViewer.ScrollToBottom();
         }
     }
 }
