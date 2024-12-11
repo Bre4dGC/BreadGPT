@@ -46,15 +46,6 @@ namespace BreadGPT.Services
             }
         }
 
-        public async Task<Chat> Get(Guid id)
-        {
-            using (ApplicationDbContext context = _contextFactory.CreateDbContext())
-            {
-                Chat chat = await context.Set<Chat>().FirstOrDefaultAsync((e) => e.Id == id);
-                return chat;
-            }
-        }
-
         public async Task<Chat> Update(Guid id, Chat chat)
         {
             using (ApplicationDbContext context = _contextFactory.CreateDbContext())
