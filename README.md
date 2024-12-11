@@ -7,8 +7,6 @@
   <img src="https://img.shields.io/badge/Model-Mistral_AI-1E88E5?style=flat&logo=ai&logoColor=white"/>
 </p>
 
-BreadGPT — это клон ChatGPT, разработанный на основе **C#**, **WPF**, с использованием **SQLite** и **CommunityToolkit.MVVM**. Проект взаимодействует с нейросетью **Mistral AI** для обработки запросов пользователей.  
-
 ## Основной функционал
 
 - **Отправка запросов**: Пользователи могут отправлять запросы к нейросети Mistral AI и получать ответы.
