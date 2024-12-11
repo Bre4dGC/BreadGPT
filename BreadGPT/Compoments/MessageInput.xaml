@@ -67,7 +67,7 @@
 
     <Border
         MinHeight="48"
-        Background="{StaticResource ControlBackground}"
+        Background="{StaticResource AnswerBackground}"
         CornerRadius="25">
 
         <Grid>
