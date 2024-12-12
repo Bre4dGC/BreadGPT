@@ -19,7 +19,7 @@
     mc:Ignorable="d">
 
     <Window.DataContext>
-        <vm:MainViewModel/>
+        <vm:MainViewModel />
     </Window.DataContext>
 
     <Window.Resources>
@@ -112,6 +112,7 @@
                     <ColumnDefinition Width="30" />
                 </Grid.ColumnDefinitions>
 
+                <!--  Текст чата  -->
                 <TextBlock
                     Grid.Column="0"
                     Margin="5,0"
@@ -120,23 +121,48 @@
                     Text="{Binding Title}" />
 
                 <Grid x:Name="ActionGrid" Grid.Column="1">
-
-                    <ToggleButton Style="{StaticResource Button}">
+                    <!--  Кнопка вызова Popup  -->
+                    <ToggleButton x:Name="ToggleActionButton" Style="{StaticResource Button}">
                         <Image
                             Height="20"
                             RenderOptions.BitmapScalingMode="HighQuality"
                             Source="/Assets/more.png" />
                     </ToggleButton>
 
+                    <!--  Popup  -->
                     <Popup
                         Name="ActionPopup"
                         AllowsTransparency="True"
+                        IsOpen="{Binding IsChecked, ElementName=ToggleActionButton}"
                         Placement="Right"
                         PopupAnimation="Fade"
                         StaysOpen="False">
 
-                        <comp:ChatActionPopup />
-                        
+                        <Border
+                            Width="auto"
+                            Background="{StaticResource AnswerBackground}"
+                            BorderBrush="{StaticResource ControlBackground}"
+                            BorderThickness="2"
+                            CornerRadius="8">
+
+                            <Grid Width="120" Height="80">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <comp:ActionButton
+                                    Grid.Row="0"
+                                    Command="{Binding DataContext.RenameChatCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                    Icon="/Assets/pencil.png"
+                                    Text="Rename" />
+                                <comp:ActionButton
+                                    Grid.Row="1"
+                                    Command="{Binding DataContext.DeleteChatCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                    Icon="/Assets/delete.png"
+                                    Text="Delete" />
+                            </Grid>
+                        </Border>
                     </Popup>
 
                     <Grid.Style>
@@ -158,11 +184,11 @@
             <comp:Message x:Name="Message" MessageContent="{Binding Text}" />
 
             <DataTemplate.Triggers>
-                <DataTrigger Binding="{Binding Path=IsSendByUser}" Value="True">
+                <DataTrigger Binding="{Binding IsSendByUser}" Value="True">
                     <Setter Property="HorizontalAlignment" Value="Right" />
                     <Setter TargetName="Message" Property="Background" Value="{StaticResource AnswerBackground}" />
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=IsSendByUser}" Value="False">
+                <DataTrigger Binding="{Binding IsSendByUser}" Value="False">
                     <Setter Property="HorizontalAlignment" Value="Left" />
                     <Setter TargetName="Message" Property="Background" Value="{StaticResource ControlBackground}" />
                 </DataTrigger>
@@ -185,13 +211,13 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <!-- Логотип -->
+                    <!--  Логотип  -->
                     <TextBlock
                         Grid.Row="0"
                         Style="{StaticResource Logo}"
                         Text="BreadGPT" />
 
-                    <!-- Чаты -->
+                    <!--  Чаты  -->
                     <Border Grid.Row="1" Margin="10">
                         <ListBox
                             Background="Transparent"
@@ -281,15 +307,15 @@
                             </StackPanel>
                         </ScrollViewer>
 
-                        <!-- Ввод сообщения -->
+                        <!--  Ввод сообщения  -->
                         <comp:MessageInput
                             x:Name="Input"
                             Grid.Row="1"
                             Margin="0,15"
-                            IsEnabled="{Binding SendButtonEnabled}"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Bottom"
                             Command="{Binding SendMessageCommand}"
+                            IsEnabled="{Binding SendButtonEnabled}"
                             Text="{Binding TextMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </Grid>

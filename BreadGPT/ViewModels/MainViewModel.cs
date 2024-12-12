@@ -57,9 +57,9 @@ namespace BreadGPT.ViewModels
             _mistralClient = new MistralClient("r15uvSJsdSTGKygysJWuJqKRZjQGAKEm");
 
             CreateChatCommand = new RelayCommand(CreateChat);
+            SendMessageCommand = new RelayCommand(SendMessage);
             RenameChatCommand = new RelayCommand(RenameChat);
             DeleteChatCommand = new RelayCommand(DeleteChat);
-            SendMessageCommand = new RelayCommand(SendMessage);
 
             LoadChats();
         }
@@ -70,6 +70,7 @@ namespace BreadGPT.ViewModels
         private void CreateChat()
         {
             if (Chats.Any() && SelectedChat.Messages.Count == 0) return;
+
             if (Chats.Count >= 10)
             {
                 MessageBox.Show("You have reached the maximum number of chats.");
@@ -102,12 +103,6 @@ namespace BreadGPT.ViewModels
         private async void LoadChats()
         {
             var chats = await _chatService.GetAll();
-
-            if (!chats.Any())
-            {
-                CreateChat();
-                return;
-            }
 
             try
             {
@@ -203,10 +198,12 @@ namespace BreadGPT.ViewModels
         {
             try
             {
-                Chats.Remove(SelectedChat);
                 _chatService.Delete(SelectedChat.Id);
+                Chats.Remove(SelectedChat);
+
+                SelectedChat = Chats.FirstOrDefault();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}");
             }
@@ -217,6 +214,8 @@ namespace BreadGPT.ViewModels
         /// </summary>
         private async void SendMessage()
         {
+            if(Chats.Count == 0) CreateChat();
+
             if (string.IsNullOrWhiteSpace(TextMessage) || SelectedChat.Messages.Count >= 25) return;
 
             var messageText = TextMessage;
