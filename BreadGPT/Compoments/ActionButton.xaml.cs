@@ -27,21 +27,17 @@ namespace BreadGPT.Compoments
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register(nameof(Text), typeof(string), typeof(ActionButton));
 
-
-
         /// <summary>
         /// Команды для кнопки
         /// </summary>
         public ICommand Command
         {
-            get => (ICommand)GetValue(ButtonCommandProperty);
-            set => SetValue(ButtonCommandProperty, value);
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
         }
 
-        public static readonly DependencyProperty ButtonCommandProperty =
+        public static readonly DependencyProperty CommandProperty =
         DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(ActionButton), new PropertyMetadata(null));
-
-
 
         /// <summary>
         /// Иконка для кнопки
