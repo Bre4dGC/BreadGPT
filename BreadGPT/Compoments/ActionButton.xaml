@@ -33,7 +33,10 @@
         </Style>
     </UserControl.Resources>
 
-    <Button Height="45" Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}">
+    <Button
+        Height="45"
+        Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
+        CommandParameter="{Binding}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />

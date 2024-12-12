@@ -47,7 +47,7 @@ namespace BreadGPT.ViewModels
 
         public ICommand CreateChatCommand { get; }
         public ICommand RenameChatCommand { get; }
-        public ICommand DeleteChatCommand { get; }
+        public ICommand RemoveChatCommand { get; }
         public ICommand SendMessageCommand { get; }
 
         public MainViewModel()
@@ -59,7 +59,7 @@ namespace BreadGPT.ViewModels
             CreateChatCommand = new RelayCommand(CreateChat);
             SendMessageCommand = new RelayCommand(SendMessage);
             RenameChatCommand = new RelayCommand(RenameChat);
-            DeleteChatCommand = new RelayCommand(DeleteChat);
+            RemoveChatCommand = new RelayCommand<Chat>(RemoveChat);
 
             LoadChats();
         }
@@ -194,12 +194,14 @@ namespace BreadGPT.ViewModels
         /// <summary>
         /// Удалить чат
         /// </summary>
-        private void DeleteChat()
+        private void RemoveChat(Chat chatToRemove)
         {
+            if (chatToRemove == null) return;
+
             try
             {
-                _chatService.Delete(SelectedChat.Id);
-                Chats.Remove(SelectedChat);
+                _chatService.Delete(chatToRemove.Id);
+                Chats.Remove(chatToRemove);
 
                 SelectedChat = Chats.FirstOrDefault();
             }

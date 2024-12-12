@@ -158,7 +158,7 @@
                                     Text="Rename" />
                                 <comp:ActionButton
                                     Grid.Row="1"
-                                    Command="{Binding DataContext.DeleteChatCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                    Command="{Binding DataContext.RemoveChatCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                     Icon="/Assets/delete.png"
                                     Text="Delete" />
                             </Grid>
