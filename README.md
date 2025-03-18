@@ -7,6 +7,10 @@
   <img src="https://img.shields.io/badge/Model-Mistral_AI-1E88E5?style=flat&logo=ai&logoColor=white"/>
 </p>
 
+<p align="center">
+  <a href="https://ibb.co/Vp2GzPfQ"><img src="https://i.ibb.co/prJTM9YR/photo-2025-03-19-01-07-48.jpg" alt="photo-2025-03-19-01-07-48" border="0"></a>
+</p>
+
 ## Основной функционал
 
 - **Отправка запросов**: Пользователи могут отправлять запросы к нейросети Mistral AI и получать ответы.
